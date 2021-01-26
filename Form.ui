@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>596</width>
-    <height>240</height>
+    <width>550</width>
+    <height>267</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -744,9 +744,19 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QLabel" name="LoadingLable">
+            <property name="text">
+             <string>o</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="page_3">
+       <layout class="QVBoxLayout" name="verticalLayout_2"/>
       </widget>
      </widget>
     </item>
@@ -757,7 +767,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>596</width>
+     <width>550</width>
      <height>26</height>
     </rect>
    </property>

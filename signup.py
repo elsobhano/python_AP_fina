@@ -42,7 +42,7 @@ class IntroWindow(QMainWindow,form):
         self.EntButton.clicked.connect(self.sign_up)
         self.SignUpButton.clicked.connect(self.go_to_sign_up)
         self.BackButton.clicked.connect(self.go_to_sign_in)
-        # self.EntButton_2.clicked.connect(self.sign_in)
+        self.EntButton_2.clicked.connect(self.sign_in)
         #self.conn.close()
 
     def sign_up(self):
@@ -64,11 +64,12 @@ class IntroWindow(QMainWindow,form):
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM patients")
         check = self.c.fetchall()
+        self.LoadingLable.setText('Loading ... ')
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-               pass 
+               self.LoadingLable.setText('That is okay ' )
             else:
-               pass
+               self.LoadingLabel.setText('Please enter valid phone or password')
                 
         self.conn.close()
 
