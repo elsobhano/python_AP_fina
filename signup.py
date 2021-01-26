@@ -66,8 +66,7 @@ class IntroWindow(QMainWindow,form):
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
                 pass
             else:
-                pass
-                
+                pass        
         self.conn.close()
 
 
