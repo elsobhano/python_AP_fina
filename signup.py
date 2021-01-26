@@ -13,6 +13,12 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
+
+class Second(QMainWindow,form):
+    def __init__(self, parent=None):
+        super(Second, self).__init__(parent)
+        self.setupUi(self)
+
 class IntroWindow(QMainWindow,form):
     
 
@@ -58,36 +64,24 @@ class IntroWindow(QMainWindow,form):
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
 
-
-    def sign_in(self):
-        print('hey')
-        self.conn = sqlite3.connect("patient.db")
-        print('hey')
-        self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM patients")
-        check = self.c.fetchall()
-        for i in check:
-            if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-                print('ok')
-            else:
-                print('nok')
-                
-        self.conn.close()
-
-
-
     def sign_in(self):
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM patients")
         check = self.c.fetchall()
-        self.LoadingLable.setText('Loading ... ')
+        self.LoadingLabel.setText('Loading ... ')
+        flag = False
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-               self.LoadingLable.setText('That is okay ' )
-            else:
-               self.LoadingLabel.setText('Please enter valid phone or password')
-                
+               flag = True
+            
+        if flag :
+            self.close()
+            a=Second(self)
+            a.show()
+        else:
+            self.LoadingLabel.setText('nOk')
+                 
         self.conn.close()
 
 
