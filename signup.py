@@ -14,12 +14,19 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
 class IntroWindow(QMainWindow,form):
+    
+
     def __init__(self):
         super(IntroWindow,self).__init__()
         self.setupUi(self)
+        self.EntButton.setEnabled(False)
         self.PassEdit.setEchoMode(QLineEdit.Password)
         self.PassEdit.setMaxLength(20)
         self.PhoneEdit.setInputMask('0000-0000000')
+        self.FirstEdit.textEdited.connect(self.validate)
+        self.PassEdit.textEdited.connect(self.validate)
+        self.LastEdit.textEdited.connect(self.validate)
+        self.PhoneEdit.textEdited.connect(self.validate)
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
         self.EntButton.clicked.connect(self.sign_up)
@@ -38,6 +45,11 @@ class IntroWindow(QMainWindow,form):
         self.conn.close()
 
 
+    def validate(self):
+        if (self.FirstEdit.text() != '' and self.LastEdit.text() != '' and self.PassEdit.text() != '' and self.PhoneEdit.hasAcceptableInput()):
+            self.EntButton.setEnabled(True)
+        else :
+            self.EntButton.setEnabled(False)
 
 
 
