@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
-    <height>243</height>
+    <width>596</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -33,7 +33,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -42,7 +42,7 @@
        <color alpha="255">
         <red>255</red>
         <green>255</green>
-        <blue>191</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -51,7 +51,7 @@
        <color alpha="255">
         <red>212</red>
         <green>212</green>
-        <blue>159</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -60,7 +60,7 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -69,7 +69,7 @@
        <color alpha="255">
         <red>113</red>
         <green>113</green>
-        <blue>85</blue>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
@@ -114,7 +114,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -132,7 +132,7 @@
        <color alpha="255">
         <red>212</red>
         <green>212</green>
-        <blue>191</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -179,7 +179,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -188,7 +188,7 @@
        <color alpha="255">
         <red>255</red>
         <green>255</green>
-        <blue>191</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -197,7 +197,7 @@
        <color alpha="255">
         <red>212</red>
         <green>212</green>
-        <blue>159</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -206,7 +206,7 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -215,7 +215,7 @@
        <color alpha="255">
         <red>113</red>
         <green>113</green>
-        <blue>85</blue>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
@@ -260,7 +260,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -278,7 +278,7 @@
        <color alpha="255">
         <red>212</red>
         <green>212</green>
-        <blue>191</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -316,16 +316,16 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>170</red>
-        <green>170</green>
-        <blue>127</blue>
+        <red>220</red>
+        <green>225</green>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -334,7 +334,7 @@
        <color alpha="255">
         <red>255</red>
         <green>255</green>
-        <blue>191</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -343,7 +343,7 @@
        <color alpha="255">
         <red>212</red>
         <green>212</green>
-        <blue>159</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -352,7 +352,7 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -361,7 +361,7 @@
        <color alpha="255">
         <red>113</red>
         <green>113</green>
-        <blue>85</blue>
+        <blue>170</blue>
        </color>
       </brush>
      </colorrole>
@@ -370,7 +370,7 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -388,7 +388,7 @@
        <color alpha="255">
         <red>85</red>
         <green>85</green>
-        <blue>64</blue>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -397,7 +397,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -406,7 +406,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -424,7 +424,7 @@
        <color alpha="255">
         <red>170</red>
         <green>170</green>
-        <blue>127</blue>
+        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -459,60 +459,33 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>SignUp</string>
+   <string>Dentisty</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_5">
     <item>
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="StackWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>First Name</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="FirstEdit"/>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label">
               <property name="text">
-               <string>Last Name </string>
+               <string>First Name</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="LastEdit"/>
+             <widget class="QLineEdit" name="FirstEdit"/>
             </item>
             <item>
-             <spacer name="horizontalSpacer_2">
+             <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -527,58 +500,92 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>Phone       </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="PhoneEdit"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Last Name </string>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Password  </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="PassEdit"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+           <widget class="QLineEdit" name="LastEdit"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Phone       </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="PhoneEdit"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Password  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="PassEdit"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="BackButton">
+            <property name="text">
+             <string>Back</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="EntButton">
@@ -629,63 +636,63 @@
        </layout>
       </widget>
       <widget class="QWidget" name="page_2">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Phone       </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="PhoneEdit_2"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Phone       </string>
+            </property>
+           </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>Password  </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="PassEdit_2"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+           <widget class="QLineEdit" name="PhoneEdit_2"/>
           </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Password  </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="PassEdit_2"/>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
            <widget class="QPushButton" name="EntButton_2">
             <property name="palette">
@@ -730,6 +737,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="SignUpButton">
+            <property name="text">
+             <string>Create an account</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -743,7 +757,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>572</width>
+     <width>596</width>
      <height>26</height>
     </rect>
    </property>

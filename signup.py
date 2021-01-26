@@ -1,7 +1,7 @@
 import sys
 import os
 from PyQt5 import uic, QtCore
-from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
 import random
 import matplotlib
 import numpy as np
@@ -19,17 +19,30 @@ class IntroWindow(QMainWindow,form):
     def __init__(self):
         super(IntroWindow,self).__init__()
         self.setupUi(self)
+        self.StackWidget.setCurrentIndex(1)
         self.EntButton.setEnabled(False)
+        self.EntButton_2.setEnabled(False)
         self.PassEdit.setEchoMode(QLineEdit.Password)
         self.PassEdit.setMaxLength(20)
-        self.PhoneEdit.setInputMask('0000-0000000')
+        self.PassEdit_2.setEchoMode(QLineEdit.Password)
+        self.PassEdit_2.setMaxLength(20)
+        self.PhoneEdit.setInputMask('99999999999')
+        self.PassEdit_2.setMaxLength(20)
+        self.PhoneEdit_2.setInputMask('99999999999')
         self.FirstEdit.textEdited.connect(self.validate)
         self.PassEdit.textEdited.connect(self.validate)
         self.LastEdit.textEdited.connect(self.validate)
         self.PhoneEdit.textEdited.connect(self.validate)
+
+        self.PassEdit_2.textEdited.connect(self.validate_2)
+        self.PhoneEdit_2.textEdited.connect(self.validate_2)
+
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
         self.EntButton.clicked.connect(self.sign_up)
+        self.SignUpButton.clicked.connect(self.go_to_sign_up)
+        self.BackButton.clicked.connect(self.go_to_sign_in)
+        # self.EntButton_2.clicked.connect(self.sign_in)
         #self.conn.close()
 
     def sign_up(self):
@@ -43,7 +56,7 @@ class IntroWindow(QMainWindow,form):
         print(self.c.fetchall())
         self.conn.commit()
         self.conn.close()
-
+        self.StackWidget.setCurrentIndex(1)
 
     def validate(self):
         if (self.FirstEdit.text() != '' and self.LastEdit.text() != '' and self.PassEdit.text() != '' and self.PhoneEdit.hasAcceptableInput()):
@@ -51,7 +64,17 @@ class IntroWindow(QMainWindow,form):
         else :
             self.EntButton.setEnabled(False)
 
+    def validate_2(self):
+        if (self.PassEdit_2.text() != '' and self.PhoneEdit_2.hasAcceptableInput()):
+            self.EntButton_2.setEnabled(True)
+        else :
+            self.EntButton_2.setEnabled(False)
 
+    def go_to_sign_up(self):
+        self.StackWidget.setCurrentIndex(0)
+
+    def go_to_sign_in(self):
+        self.StackWidget.setCurrentIndex(1)
 
 
 if __name__ == "__main__":
