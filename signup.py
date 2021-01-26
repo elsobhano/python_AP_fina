@@ -43,7 +43,7 @@ class IntroWindow(QMainWindow,form):
         self.SignUpButton.clicked.connect(self.go_to_sign_up)
         self.BackButton.clicked.connect(self.go_to_sign_in)
         self.EntButton_2.clicked.connect(self.sign_in)
-        #self.conn.close()
+        # self.conn.close()
 
     def sign_up(self):
         self.c.execute("SELECT * FROM patients")
@@ -57,16 +57,20 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
+
+
     def sign_in(self):
+        print('hey')
         self.conn = sqlite3.connect("patient.db")
+        print('hey')
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM patients")
         check = self.c.fetchall()
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-                pass
+                print('ok')
             else:
-                pass
+                print('nok')
                 
         self.conn.close()
 
