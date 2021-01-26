@@ -23,8 +23,15 @@ class IntroWindow(QMainWindow,form):
         #self.conn.close()
 
     def sign_up(self):
-        self.c.execute('INSERT INTO patients (First_Name, Last_Name, Password, Phone) VALUES (self.FirstEdit.text(), self.LastEdit.text(), self.PassEdit.text(),self.PhoneEdit.text()); ')
+        self.c.execute("SELECT * FROM patients")
         print(self.c.fetchall())
+        sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
+        val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+        print(val)
+        self.c.execute(sql, val)
+        self.c.execute("SELECT * FROM patients")
+        print(self.c.fetchall())
+        self.conn.commit()
         self.conn.close()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
