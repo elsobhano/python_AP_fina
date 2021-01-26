@@ -57,6 +57,19 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
+    def sign_in(self):
+        self.conn = sqlite3.connect("patient.db")
+        self.c = self.conn.cursor()
+        self.c.execute("SELECT * FROM patients")
+        check = self.c.fetchall()
+        for i in check:
+            if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
+                pass
+            else:
+                pass
+                
+        self.conn.close()
+
 
     def validate(self):
         if (self.FirstEdit.text() != '' and self.LastEdit.text() != '' and self.PassEdit.text() != '' and self.PhoneEdit.hasAcceptableInput()):
