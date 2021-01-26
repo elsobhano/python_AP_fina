@@ -1,7 +1,7 @@
 import sys
 import os
 from PyQt5 import uic, QtCore
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout
 import random
 import matplotlib
 import numpy as np
@@ -17,6 +17,9 @@ class IntroWindow(QMainWindow,form):
     def __init__(self):
         super(IntroWindow,self).__init__()
         self.setupUi(self)
+        self.PassEdit.setEchoMode(QLineEdit.Password)
+        self.PassEdit.setMaxLength(20)
+        self.PhoneEdit.setInputMask('0000-0000000')
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
         self.EntButton.clicked.connect(self.sign_up)
@@ -39,3 +42,4 @@ if __name__ == "__main__":
     w = IntroWindow()
     w.show()
     sys.exit(app.exec_())
+
