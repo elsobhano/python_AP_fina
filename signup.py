@@ -29,6 +29,12 @@ class IntroWindow(QMainWindow,form):
         self.c.execute('INSERT INTO patients (First_Name, Last_Name, Password, Phone) VALUES (self.FirstEdit.text(), self.LastEdit.text(), self.PassEdit.text(),self.PhoneEdit.text()); ')
         print(self.c.fetchall())
         self.conn.close()
+
+
+
+
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
