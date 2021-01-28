@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5 import uic, QtCore
+from PyQt5 import uic, QtCore,Qt
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
 import random
 import matplotlib
@@ -13,11 +13,15 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
+form1=uic.loadUiType(os.path.join(os.getcwd(),"GUI_BASE.ui"))[0]
 
-class Second(QMainWindow,form):
+
+class Second(QMainWindow,form1):
     def __init__(self, parent=None):
         super(Second, self).__init__(parent)
         self.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        
 
 class IntroWindow(QMainWindow,form):
     
