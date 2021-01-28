@@ -36,6 +36,7 @@ Window {
             anchors.bottomMargin: 1
             anchors.topMargin: 1
 
+
             Rectangle {
                 id: topBar
                 height: 70
@@ -185,6 +186,8 @@ Window {
 
             }
 
+
+
             Rectangle {
                 id: content
                 color: "#00000000"
@@ -197,8 +200,24 @@ Window {
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
 
+
+                Image {
+                    id: bg_content_image
+                    y: 0
+                    opacity: 0.1
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    source: "../images/svg/bg_icon_white.png"
+                    anchors.leftMargin: 0
+                    fillMode: Image.PreserveAspectFit
+                }
+
                 Rectangle {
                     id: leftMenu
+                    x: 0
+                    y: -70
                     width: 70
                     color: "#1e222a"
                     anchors.left: parent.left
@@ -208,34 +227,54 @@ Window {
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
 
-                    CustomBtn {
+                    LeftMenuBtn {
                         id: savabeghBtn
                         x: 0
-                        anchors.top: parent.top
-                        toggleBtnIcon: "../images/svg/wysiwyg-24px.svg"
-                        anchors.topMargin: 0
+                        y: 0
+                        width: 250
+                        text: "سوابق مراجعات"
+                        isActiveText: true
+                        isActiveMenu: true
+                        display: AbstractButton.IconOnly
+                        //                        x: 0
+                        //                        anchors.top: parent.top
+                        //                        toggleBtnIcon: "../images/svg/wysiwyg-24px.svg"
+                        //                        anchors.topMargin: 0
                     }
 
-                    CustomBtn {
-                        id: nobatBtn
-                        x: 0
+                    LeftMenuBtn {
+                        id: setAppointmentBtn
+                        width: 250
+                        text: "نوبت گیری"
+                        anchors.left: parent.left
                         anchors.top: savabeghBtn.bottom
+                        toggleBtnIcon: "../images/svg/event_note-24px.svg"
+                        anchors.leftMargin: 0
                         anchors.topMargin: 0
+                        isActiveMenu: true
+                        isActiveText: true
+                        display: AbstractButton.IconOnly
                     }
+
+                    LeftMenuBtn {
+                        id: setAppointmentBtn1
+                        width: 250
+                        text: "پیام ها"
+                        anchors.top: setAppointmentBtn.bottom
+                        isActiveMenu: true
+                        toggleBtnIcon: "../images/svg/chat-24px.svg"
+                        anchors.topMargin: 0
+                        isActiveText: true
+                        display: AbstractButton.IconOnly
+                    }
+
                 }
 
-                Image {
-                    id: bg_content_image
-                    opacity: 0.1
-                    anchors.left: leftMenu.right
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    source: "../images/svg/bg_icon_white.png"
-                    anchors.leftMargin: -70
-                    fillMode: Image.PreserveAspectFit
-                }
+
+
+
             }
+
 
         }
     }
@@ -245,6 +284,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9}D{i:16}D{i:17}D{i:18}
+    D{i:0;formeditorZoom:1.66}D{i:15}D{i:18}D{i:19}
 }
 ##^##*/
