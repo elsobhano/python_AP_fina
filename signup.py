@@ -13,6 +13,12 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
+
+class Second(QMainWindow,form):
+    def __init__(self, parent=None):
+        super(Second, self).__init__(parent)
+        self.setupUi(self)
+
 class IntroWindow(QMainWindow,form):
     
 
@@ -42,8 +48,8 @@ class IntroWindow(QMainWindow,form):
         self.EntButton.clicked.connect(self.sign_up)
         self.SignUpButton.clicked.connect(self.go_to_sign_up)
         self.BackButton.clicked.connect(self.go_to_sign_in)
-        # self.EntButton_2.clicked.connect(self.sign_in)
-        #self.conn.close()
+        self.EntButton_2.clicked.connect(self.sign_in)
+        # self.conn.close()
 
     def sign_up(self):
         self.c.execute("SELECT * FROM patients")
@@ -57,16 +63,24 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
+
     def sign_in(self):
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM patients")
         check = self.c.fetchall()
+        self.LoadingLabel.setText('Loading ... ')
+        flag = False
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-                pass
-            else:
-                pass        
+               flag = True
+        if flag :
+            self.close()
+            a=Second(self)
+            a.show()
+        else:
+            self.LoadingLabel.setText('nOk')
+                 
         self.conn.close()
 
 
