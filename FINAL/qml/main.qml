@@ -119,10 +119,14 @@ Window {
                     Image {
                         id: appIcon
                         width: 28
+                        opacity: 1
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
-                        source: "../images/svg/bg_icon_white.png"
+                        source: "../images/svg/record_voice_over-24px.svg"
+                        clip: true
+                        autoTransform: false
+                        mipmap: false
                         anchors.topMargin: 2
                         anchors.bottomMargin: 2
                         anchors.leftMargin: 2
@@ -178,9 +182,9 @@ Window {
                         anchors.left: maximizeBtn.right
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 0
                         anchors.topMargin: 0
                         anchors.leftMargin: 0
-                        anchors.bottomMargin: 0
                     }
                 }
 
@@ -201,18 +205,11 @@ Window {
                 anchors.topMargin: 0
 
 
-                Image {
-                    id: bg_content_image
-                    y: 0
-                    opacity: 0.1
-                    anchors.left: leftMenu.right
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    source: "../images/svg/bg_icon_white.png"
-                    anchors.leftMargin: 0
-                    fillMode: Image.PreserveAspectFit
-                }
+
+
+
+
+
 
                 Rectangle {
                     id: leftMenu
@@ -273,6 +270,29 @@ Window {
 
 
 
+
+                Rectangle {
+                    id: rectangle
+                    color: "#2c313c"
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.leftMargin: 0
+                }
+
+                Image {
+                    id: bg_content_image
+                    y: 0
+                    opacity: 0.1
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    source: "../images/svg/bg_icon_white.png"
+                    anchors.leftMargin: 0
+                    fillMode: Image.PreserveAspectFit
+                }
             }
 
 
@@ -284,6 +304,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.66}D{i:15}D{i:18}D{i:19}
+    D{i:0;formeditorZoom:1.33}D{i:17}D{i:18}D{i:19}D{i:20}
 }
 ##^##*/
