@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.calendar 1.0
 import Qt.labs.qmlmodels 1.0
-
+import "./controls"
 Window {
     id: window
     width: 640
@@ -47,13 +47,15 @@ Window {
                 anchors.leftMargin: 0
                 anchors.topMargin: 0
 
-                Button {
+                CustomBtn {
                     id: toggleButton
                     width: 70
                     height: 70
+                    opacity: 1
                     text: qsTr("Button")
                     anchors.left: parent.left
                     anchors.top: parent.top
+                    display: AbstractButton.IconOnly
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
                 }
@@ -186,6 +188,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:10}
+    D{i:0;formeditorZoom:0.75}
 }
 ##^##*/
