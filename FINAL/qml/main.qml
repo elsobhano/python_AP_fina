@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import Qt.labs.calendar 1.0
 import Qt.labs.qmlmodels 1.0
 import "./controls"
+import "controls"
 Window {
     id: window
     width: 640
@@ -55,6 +56,7 @@ Window {
                     text: qsTr("Button")
                     anchors.left: parent.left
                     anchors.top: parent.top
+                    toggleBtnIcon: "../images/svg/view_headline-24px.svg"
                     display: AbstractButton.IconOnly
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
@@ -142,7 +144,45 @@ Window {
                         padding: 8
                         font.family: "Tahoma"
                     }
+
+                    MinimizeBtn {
+                        id: minimizeBtn
+                        x: 458
+                        y: 0
+                        width: 35
+                        anchors.left: appTitle.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.leftMargin: 0
+                        anchors.bottomMargin: 0
+                        anchors.topMargin: 0
+                    }
+
+                    MaximizeBtn {
+                        id: maximizeBtn
+                        y: -4
+                        width: 35
+                        anchors.left: minimizeBtn.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.bottomMargin: 0
+                        anchors.leftMargin: 0
+                    }
+
+                    CloseBtn {
+                        id: closeBtn
+                        y: -4
+                        width: 35
+                        anchors.left: maximizeBtn.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 0
+                        anchors.leftMargin: 0
+                        anchors.bottomMargin: 0
+                    }
                 }
+
             }
 
             Rectangle {
@@ -167,19 +207,36 @@ Window {
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
+
+                    CustomBtn {
+                        id: savabeghBtn
+                        x: 0
+                        anchors.top: parent.top
+                        toggleBtnIcon: "../images/svg/wysiwyg-24px.svg"
+                        anchors.topMargin: 0
+                    }
+
+                    CustomBtn {
+                        id: nobatBtn
+                        x: 0
+                        anchors.top: savabeghBtn.bottom
+                        anchors.topMargin: 0
+                    }
                 }
 
                 Image {
-                    id: image
-                    x: 70
-                    y: 0
-                    width: 548
-                    height: 388
+                    id: bg_content_image
                     opacity: 0.1
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     source: "../images/svg/bg_icon_white.png"
+                    anchors.leftMargin: -70
                     fillMode: Image.PreserveAspectFit
                 }
             }
+
         }
     }
 }
@@ -188,6 +245,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}
+    D{i:0;formeditorZoom:0.9}D{i:16}D{i:17}D{i:18}
 }
 ##^##*/
