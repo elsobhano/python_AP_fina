@@ -13,7 +13,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
-form1=uic.loadUiType(os.path.join(os.getcwd(),"GUI_BASE.ui"))[0]
+form1=uic.loadUiType(os.path.join(os.getcwd(),"Patient.ui"))[0]
 
 
 class Second(QMainWindow,form1):
