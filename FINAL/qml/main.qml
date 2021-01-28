@@ -69,6 +69,34 @@ Window {
                     anchors.rightMargin: 0
                     anchors.leftMargin: 71
                     anchors.bottomMargin: 0
+
+                    Label {
+                        id: status
+                        x: 435
+                        width: 112
+                        color: "#b6b6b6"
+                        text: qsTr("سوابق مراجعات")
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        horizontalAlignment: Text.AlignRight
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.rightMargin: 0
+                        anchors.bottomMargin: 0
+                        anchors.topMargin: 0
+                    }
+
+                    Label {
+                        id: dateLabel
+                        x: 0
+                        y: 0
+                        width: 137
+                        height: 31
+                        color: "#c1c1c1"
+                        text: qsTr("دوشنبه ۱۴۰۰/۰۴/۲۷")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
 
                 Rectangle {
@@ -89,7 +117,7 @@ Window {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
-                        source: "qrc:/qtquickplugin/images/template_image.png"
+                        source: "../images/svg/bg_icon_white.png"
                         anchors.topMargin: 2
                         anchors.bottomMargin: 2
                         anchors.leftMargin: 2
@@ -103,13 +131,14 @@ Window {
                         anchors.left: appIcon.right
                         anchors.right: parent.right
                         anchors.top: parent.top
-                        anchors.bottom: parent.bottom
+                        anchors.bottom: appIcon.top
                         horizontalAlignment: Text.AlignHCenter
+                        anchors.leftMargin: 60
+                        anchors.bottomMargin: -36
                         font.bold: false
                         font.pointSize: 10
                         padding: 8
                         font.family: "Tahoma"
-                        anchors.leftMargin: 5
                     }
                 }
             }
@@ -137,13 +166,26 @@ Window {
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
                 }
+
+                Image {
+                    id: image
+                    x: 70
+                    y: 0
+                    width: 548
+                    height: 388
+                    opacity: 0.1
+                    source: "../images/svg/bg_icon_white.png"
+                    fillMode: Image.PreserveAspectFit
+                }
             }
         }
     }
 }
 
+
+
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9}D{i:4}D{i:5}D{i:7}D{i:8}D{i:6}
+    D{i:0;formeditorZoom:0.75}D{i:10}
 }
 ##^##*/
