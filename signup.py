@@ -53,16 +53,25 @@ class IntroWindow(QMainWindow,form):
 
     def sign_up(self):
         self.c.execute("SELECT * FROM patients")
-        print(self.c.fetchall())
-        sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
-        val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
-        print(val)
-        self.c.execute(sql, val)
-        self.c.execute("SELECT * FROM patients")
-        print(self.c.fetchall())
-        self.conn.commit()
-        self.conn.close()
-        self.StackWidget.setCurrentIndex(1)
+        #print(self.c.fetchall())
+        print('Here')
+        check  = 1
+        print(check)
+        k = self.c.fetchall()
+        print(k)
+        for i in k:
+            if self.PhoneEdit.text() in i:
+                check = 0
+        if check == 1:
+            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
+            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+            print(val)
+            self.c.execute(sql, val)
+            self.c.execute("SELECT * FROM patients")
+            print(self.c.fetchall())
+            self.conn.commit()
+            self.conn.close()
+            self.StackWidget.setCurrentIndex(1)
 
     def sign_in(self):
         self.conn = sqlite3.connect("patient.db")
