@@ -28,7 +28,7 @@ Window {
             }
         }
     }
-
+    
     Rectangle {
         id: bg
         color: "#2c313c"
@@ -41,7 +41,7 @@ Window {
         anchors.leftMargin: 10
         anchors.bottomMargin: 10
         anchors.topMargin: 10
-
+        
         Rectangle {
             id: appContainer
             color: "#00000000"
@@ -52,8 +52,8 @@ Window {
             anchors.leftMargin: 1
             anchors.bottomMargin: 1
             anchors.topMargin: 1
-
-
+            
+            
             Rectangle {
                 id: topBar
                 height: 70
@@ -65,7 +65,7 @@ Window {
                 anchors.rightMargin: 0
                 anchors.leftMargin: 0
                 anchors.topMargin: 0
-
+                
                 CustomBtn {
                     onClicked: toggleMenuExpanding.running = true
                     id: toggleButton
@@ -80,7 +80,7 @@ Window {
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
                 }
-
+                
                 Rectangle {
                     id: topBarDescription
                     y: 39
@@ -92,7 +92,7 @@ Window {
                     anchors.rightMargin: 0
                     anchors.leftMargin: 71
                     anchors.bottomMargin: 0
-
+                    
                     Label {
                         id: status
                         x: 435
@@ -108,7 +108,7 @@ Window {
                         anchors.bottomMargin: 0
                         anchors.topMargin: 0
                     }
-
+                    
                     Label {
                         id: dateLabel
                         x: 0
@@ -121,7 +121,7 @@ Window {
                         verticalAlignment: Text.AlignVCenter
                     }
                 }
-
+                
                 Rectangle {
                     id: titleBar
                     y: 0
@@ -133,13 +133,13 @@ Window {
                     anchors.rightMargin: 105
                     anchors.leftMargin: 71
                     anchors.bottomMargin: 32
-
+                    
                     DragHandler{
                         onActiveChanged: if(active){
                                              window.startSystemMove();
                                          }
                     }
-
+                    
                     Image {
                         id: appIcon
                         width: 28
@@ -157,7 +157,7 @@ Window {
                         anchors.leftMargin: 2
                         fillMode: Image.PreserveAspectFit
                     }
-
+                    
                     Label {
                         id: appTitle
                         color: "#9cafd4"
@@ -174,7 +174,7 @@ Window {
                         padding: 8
                         font.family: "Tahoma"
                     }
-
+                    
                     MinimizeBtn {
                         id: minimizeBtn
                         x: 458
@@ -188,7 +188,7 @@ Window {
                         anchors.topMargin: 0
                         onClicked: window.showMinimized()
                     }
-
+                    
                     MaximizeBtn {
                         id: maximizeBtn
                         y: -4
@@ -201,7 +201,7 @@ Window {
                         anchors.leftMargin: 0
                         onClicked: internal.minmaxwindow()
                     }
-
+                    
                     CloseBtn {
                         id: closeBtn
                         y: -4
@@ -215,11 +215,11 @@ Window {
                         onClicked: window.close()
                     }
                 }
-
+                
             }
-
-
-
+            
+            
+            
             Rectangle {
                 id: content
                 color: "#00000000"
@@ -231,14 +231,14 @@ Window {
                 anchors.leftMargin: 0
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
-
-
-
-
-
-
-
-
+                
+                
+                
+                
+                
+                
+                
+                
                 Rectangle {
                     id: leftMenu
                     x: 0
@@ -251,7 +251,7 @@ Window {
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
-
+                    
                     PropertyAnimation{
                         id:toggleMenuExpanding
                         target: leftMenu
@@ -262,7 +262,7 @@ Window {
                         duration: 500
                         easing.type: Easing.InOutCirc
                     }
-
+                    
                     LeftMenuBtn {
                         id: savabeghBtn
                         x: 0
@@ -277,7 +277,7 @@ Window {
                         //                        toggleBtnIcon: "../images/svg/wysiwyg-24px.svg"
                         //                        anchors.topMargin: 0
                     }
-
+                    
                     LeftMenuBtn {
                         id: setAppointmentBtn
                         width: 250
@@ -291,7 +291,7 @@ Window {
                         isActiveText: true
                         display: AbstractButton.IconOnly
                     }
-
+                    
                     LeftMenuBtn {
                         id: setAppointmentBtn1
                         width: 250
@@ -303,13 +303,13 @@ Window {
                         isActiveText: true
                         display: AbstractButton.IconOnly
                     }
-
+                    
                 }
-
-
-
-
-
+                
+                
+                
+                
+                
                 Rectangle {
                     id: rectangle
                     color: "#2c313c"
@@ -319,7 +319,7 @@ Window {
                     anchors.bottom: parent.bottom
                     anchors.leftMargin: 0
                 }
-
+                
                 Image {
                     id: bg_content_image
                     y: 0
@@ -332,13 +332,22 @@ Window {
                     anchors.leftMargin: 0
                     fillMode: Image.PreserveAspectFit
                 }
+                
+                StackView {
+                    id: stackView
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.leftMargin: -70
+                }
             }
-
-
+            
+            
         }
-
+        
     }
-
+    
     MouseArea {
         id: leftMouseArea
         anchors.left: parent.left
@@ -357,7 +366,7 @@ Window {
                              }
         }
     }
-
+    
     MouseArea {
         id: topMouseArea
         width: 100
@@ -376,7 +385,7 @@ Window {
                              }
         }
     }
-
+    
     MouseArea {
         id: rightMouseArea
         width: 10
@@ -394,7 +403,7 @@ Window {
                              }
         }
     }
-
+    
     MouseArea {
         id: bottomMouseArea
         y: 471
@@ -413,7 +422,7 @@ Window {
                              }
         }
     }
-
+    
 }
 
 

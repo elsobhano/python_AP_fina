@@ -1,0 +1,11 @@
+import QtQuick 2.15
+
+
+Item {
+    Rectangle {
+        id: rectangle
+        color: "#ffffff"
+        anchors.fill: parent
+    }
+
+}

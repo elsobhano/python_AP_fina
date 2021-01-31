@@ -82,11 +82,13 @@ class IntroWindow(QMainWindow,form):
                flag = True
             
         if flag :
+            self.signInOk = True
             self.close()
             
             
             
         else:
+            self.signInNotOk = False
             self.LoadingLabel.setText('nOk')
                  
         self.conn.close()
@@ -117,6 +119,8 @@ async def runSignUp():
     w = IntroWindow()
     w.show()
     app.exec_()
+    return w.signInOk
+    
 
 async def runPortal():
     app = QGuiApplication(sys.argv)     
