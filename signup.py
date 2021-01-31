@@ -11,7 +11,9 @@ matplotlib.use("Qt5Agg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-
+from PySide2.QtGui import QGuiApplication
+from PySide2.QtQml import QQmlApplicationEngine
+import asyncio
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
 form1=uic.loadUiType(os.path.join(os.getcwd(),"GUI_BASE.ui"))[0]
 
@@ -81,8 +83,9 @@ class IntroWindow(QMainWindow,form):
             
         if flag :
             self.close()
-            a=Second(self)
-            a.show()
+            
+            
+            
         else:
             self.LoadingLabel.setText('nOk')
                  
@@ -108,10 +111,22 @@ class IntroWindow(QMainWindow,form):
         self.StackWidget.setCurrentIndex(1)
 
 
-if __name__ == "__main__":
+async def runSignUp():
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
     w = IntroWindow()
     w.show()
-    sys.exit(app.exec_())
+    app.exec_()
 
+async def runPortal():
+    app = QGuiApplication(sys.argv)     
+    engine = QQmlApplicationEngine()
+    print(os.path.join(os.path.dirname(__file__), "FINAL\qml\main.qml"))
+    engine.load(os.path.join(os.path.dirname(__file__), "FINAL/qml/main.qml"))
+    if not engine.rootObjects():
+        sys.exit(-1)
+    app.exec_()
+
+loop = asyncio.get_event_loop()
+print(loop.run_until_complete(runSignUp()))
+print(loop.run_until_complete(runPortal()))
