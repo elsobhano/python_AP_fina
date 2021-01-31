@@ -1,17 +1,33 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
-import Qt.labs.calendar 1.0
-import Qt.labs.qmlmodels 1.0
+
 import "./controls"
 import "controls"
+import QtGraphicalEffects 1.15
 Window {
     id: window
     width: 640
     height: 480
+    minimumWidth: 640
+    minimumHeight: 480
     visible: true
     color: "#001e222a"
     title: qsTr("Hello World")
+    flags: Qt.Window | Qt.FramelessWindowHint
+    property int windowStatus: 0
+    QtObject{
+        id:internal
+        function minmaxwindow(){
+            if(windowStatus == 0){
+                window.showMaximized();
+                windowStatus =1;
+            }else{
+                window.showNormal();
+                windowStatus =0;
+            }
+        }
+    }
 
     Rectangle {
         id: bg
@@ -50,6 +66,7 @@ Window {
                 anchors.topMargin: 0
 
                 CustomBtn {
+                    onClicked: toggleMenuExpanding.running = true
                     id: toggleButton
                     width: 70
                     height: 70
@@ -116,10 +133,17 @@ Window {
                     anchors.leftMargin: 71
                     anchors.bottomMargin: 32
 
+                    DragHandler{
+                        onActiveChanged: if(active){
+                                             window.startSystemMove();
+                                         }
+                    }
+
                     Image {
                         id: appIcon
                         width: 28
                         opacity: 1
+                        visible: false
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
@@ -161,6 +185,7 @@ Window {
                         anchors.leftMargin: 0
                         anchors.bottomMargin: 0
                         anchors.topMargin: 0
+                        onClicked: window.showMinimized()
                     }
 
                     MaximizeBtn {
@@ -173,6 +198,7 @@ Window {
                         anchors.topMargin: 0
                         anchors.bottomMargin: 0
                         anchors.leftMargin: 0
+                        onClicked: internal.minmaxwindow()
                     }
 
                     CloseBtn {
@@ -185,6 +211,7 @@ Window {
                         anchors.bottomMargin: 0
                         anchors.topMargin: 0
                         anchors.leftMargin: 0
+                        onClicked: window.close()
                     }
                 }
 
@@ -224,6 +251,17 @@ Window {
                     anchors.topMargin: 0
                     anchors.leftMargin: 0
 
+                    PropertyAnimation{
+                        id:toggleMenuExpanding
+                        target: leftMenu
+                        property: "width"
+                        to:if(leftMenu.width==70)return 250;else{
+                               return 70
+                           }
+                        duration: 500
+                        easing.type: Easing.InOutCirc
+                    }
+
                     LeftMenuBtn {
                         id: savabeghBtn
                         x: 0
@@ -248,7 +286,7 @@ Window {
                         toggleBtnIcon: "../images/svg/event_note-24px.svg"
                         anchors.leftMargin: 0
                         anchors.topMargin: 0
-                        isActiveMenu: true
+                        isActiveMenu: false
                         isActiveText: true
                         display: AbstractButton.IconOnly
                     }
@@ -258,7 +296,7 @@ Window {
                         width: 250
                         text: "پیام ها"
                         anchors.top: setAppointmentBtn.bottom
-                        isActiveMenu: true
+                        isActiveMenu: false
                         toggleBtnIcon: "../images/svg/chat-24px.svg"
                         anchors.topMargin: 0
                         isActiveText: true
@@ -297,13 +335,71 @@ Window {
 
 
         }
+
     }
+
+    MouseArea {
+        id: leftMouseArea
+        anchors.left: parent.left
+        anchors.right: bg.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        anchors.bottomMargin: 10
+        anchors.topMargin: 10
+        cursorShape: Qt.SizeHorCursor
+        DragHandler{
+            target: null
+            onActiveChanged: if(active){
+                                 window.startSystemResize(Qt.LeftEdge)
+                             }
+        }
+    }
+
+    MouseArea {
+        id: topMouseArea
+        width: 100
+        height: 9
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        cursorShape: Qt.SizeVerCursor
+        DragHandler{
+            target: null
+            onActiveChanged: if(active){
+                                 window.startSystemResize(Qt.TopEdge)
+                             }
+        }
+    }
+
+    MouseArea {
+        id: rightMouseArea
+        width: 10
+        anchors.left: bg.right
+        anchors.top: topMouseArea.bottom
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.topMargin: 0
+        anchors.leftMargin: 0
+        cursorShape: Qt.SizeHorCursor
+        DragHandler{
+            target: null
+            onActiveChanged: if(active){
+                                 window.startSystemResize(Qt.RightEdge)
+                             }
+        }
+    }
+
 }
 
 
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:17}D{i:18}D{i:19}D{i:20}
+    D{i:0;formeditorZoom:1.33}
 }
 ##^##*/
