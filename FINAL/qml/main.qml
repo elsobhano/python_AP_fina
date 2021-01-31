@@ -239,6 +239,7 @@ Window {
 
 
 
+
                 Rectangle {
                     id: leftMenu
                     x: 0
@@ -272,6 +273,13 @@ Window {
                         isActiveText: true
                         isActiveMenu: true
                         display: AbstractButton.IconOnly
+                        onClicked: {
+                            savabeghBtn.isActiveMenu=true
+                            setAppointmentBtn.isActiveMenu=false
+                            chatBtn.isActiveMenu=false
+                            stackView.push(Qt.resolvedUrl("pages/savabeghPage.qml"))
+                        }
+
                         //                        x: 0
                         //                        anchors.top: parent.top
                         //                        toggleBtnIcon: "../images/svg/wysiwyg-24px.svg"
@@ -290,10 +298,17 @@ Window {
                         isActiveMenu: false
                         isActiveText: true
                         display: AbstractButton.IconOnly
+                        onClicked: {
+                            savabeghBtn.isActiveMenu=false
+                            setAppointmentBtn.isActiveMenu=true
+                            chatBtn.isActiveMenu=false
+                            stackView.push(Qt.resolvedUrl("pages/setAppointmentPage.qml"))
+
+                        }
                     }
 
                     LeftMenuBtn {
-                        id: setAppointmentBtn1
+                        id: chatBtn
                         width: 250
                         text: "پیام ها"
                         anchors.top: setAppointmentBtn.bottom
@@ -302,9 +317,19 @@ Window {
                         anchors.topMargin: 0
                         isActiveText: true
                         display: AbstractButton.IconOnly
+                        onClicked: {
+                            savabeghBtn.isActiveMenu=false
+                            setAppointmentBtn.isActiveMenu=false
+                            chatBtn.isActiveMenu=true
+                            stackView.push(Qt.resolvedUrl("pages/chatPage.qml"))
+
+                        }
                     }
 
+
                 }
+
+
 
 
 
@@ -320,6 +345,18 @@ Window {
                     anchors.leftMargin: 0
                 }
 
+
+                StackView {
+                    id: stackView
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    clip: true
+                    anchors.leftMargin: 0
+                    initialItem: Qt.resolvedUrl("pages/savabeghPage.qml")
+                }
+
                 Image {
                     id: bg_content_image
                     y: 0
@@ -332,6 +369,7 @@ Window {
                     anchors.leftMargin: 0
                     fillMode: Image.PreserveAspectFit
                 }
+
             }
 
 
@@ -420,6 +458,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:30}
+    D{i:0;formeditorZoom:1.33}D{i:31}
 }
 ##^##*/

@@ -1,3 +1,3 @@
 {
-    "files": ["qml/controls/CustomBtn.qml","main.qml","qml/controls/ProfileBtn.qml","qml/controls/MaximizeBtn.qml","qml/controls/MinimizeBtn.qml","main.py","qml/controls/LeftMenuBtn.qml","qml/controls/CloseBtn.qml","qml/pages/savabeghPage.qml"]
+    "files": ["qml/controls/CustomBtn.qml","main.qml","qml/pages/setAppointmentPage.qml","qml/controls/ProfileBtn.qml","qml/controls/MaximizeBtn.qml","qml/controls/MinimizeBtn.qml","main.py","qml/pages/SavabeghPage.qml","qml/controls/LeftMenuBtn.qml","qml/controls/CloseBtn.qml","qml/pages/chatPage.qml"]
 }
