@@ -39,9 +39,16 @@ Rectangle {
         font.pointSize: 19
         anchors.bottomMargin: 8
         anchors.rightMargin: 8
+        
+        onClicked: {
+            
+        }
     }
 
-
+    Connections{
+        target: backend
+        
+    }
 
 
 

@@ -119,7 +119,7 @@ async def runSignUp():
     w = IntroWindow()
     w.show()
     app.exec_()
-    return w.signInOk
+    return w.signInOk,"Omid"
     
 
 async def runPortal():
