@@ -7,8 +7,8 @@ import "controls"
 import QtGraphicalEffects 1.15
 Window {
     id: window
-    width: 640
-    height: 480
+    width: 1024
+    height: 800
     minimumWidth: 640
     minimumHeight: 480
     visible: true
@@ -37,10 +37,10 @@ Window {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 10
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.bottomMargin: 5
+        anchors.topMargin: 5
 
         Rectangle {
             id: appContainer
@@ -346,6 +346,21 @@ Window {
                 }
 
 
+                Image {
+                    id: bg_content_image
+                    y: 0
+                    opacity: 0.1
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    source: "../images/svg/bg_icon_white.png"
+                    z: 0
+                    anchors.topMargin: 0
+                    anchors.leftMargin: 0
+                    fillMode: Image.PreserveAspectFit
+                }
+
                 StackView {
                     id: stackView
                     anchors.left: leftMenu.right
@@ -357,18 +372,6 @@ Window {
                     initialItem: Qt.resolvedUrl("pages/savabeghPage.qml")
                 }
 
-                Image {
-                    id: bg_content_image
-                    y: 0
-                    opacity: 0.1
-                    anchors.left: leftMenu.right
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    source: "../images/svg/bg_icon_white.png"
-                    anchors.leftMargin: 0
-                    fillMode: Image.PreserveAspectFit
-                }
 
             }
 
@@ -456,8 +459,10 @@ Window {
 
 
 
+
+
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:31}
+    D{i:0;height:800;width:1024}
 }
 ##^##*/
