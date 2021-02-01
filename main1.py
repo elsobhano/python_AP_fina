@@ -26,7 +26,6 @@ class IntroWindow(QMainWindow,form):
         self.flag1 = False
         self.Doc_Name = []
         if self.flag1==False:
-            
             self.conn = sqlite3.connect("doctor.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM doctors")
@@ -37,7 +36,6 @@ class IntroWindow(QMainWindow,form):
             for i in Docs:
                 self.Doc_Box.addItem(i[0])
                 self.Doc_Name.append(i[0])
-            
             self.conn.close()
             self.flag1=True
 
