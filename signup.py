@@ -84,7 +84,10 @@ class IntroWindow(QMainWindow,form):
         flag = False
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-                self.currentUser = self.PhoneEdit_2.text()
+                self.Name_User = i[0] + ' ' + i[1]
+                self.Phone_User = i[3]
+                print(self.Name_User)
+                print(self.Phone_User)
                 flag = True
             
         if flag :
