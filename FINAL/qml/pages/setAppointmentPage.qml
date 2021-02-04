@@ -39,15 +39,19 @@ Rectangle {
         font.pointSize: 19
         anchors.bottomMargin: 8
         anchors.rightMargin: 8
-        onPressed:
+        onClicked:
         {
-            backend.__init__()
+            backend.welcomeText()
         }
     }
 
 
     Connections{
         target: backend
+
+        function onOpenWindow(){
+            print("Heelo")
+        }
     }
 
 

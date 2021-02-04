@@ -3,6 +3,7 @@ import os
 from PyQt5 import uic, QtCore,Qt
 from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
 import random
+
 import matplotlib
 from matplotlib.backends.backend_qt5 import MainWindow
 import numpy as np
@@ -14,6 +15,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtCore import QObject,Signal,Slot
 import asyncio
 from setAppointment import setAppointmentWindow
 
@@ -82,7 +84,8 @@ class IntroWindow(QMainWindow,form):
         flag = False
         for i in check:
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
-               flag = True
+                self.currentUser = self.PhoneEdit_2.text()
+                flag = True
             
         if flag :
             self.signInOk = True
@@ -115,7 +118,26 @@ class IntroWindow(QMainWindow,form):
     def go_to_sign_in(self):
         self.StackWidget.setCurrentIndex(1)
 
+class addAppointmentWindow(QObject):
+    def __init__(self):
+        QObject.__init__(self)
 
+    async def showAppointmentWindow(self):
+        # app = QApplication(sys.argv)
+        # app.setStyle("Fusion")
+        w = setAppointmentWindow()
+        w.show()
+        # app.exec_() 
+
+    @Slot()
+    def welcomeText(self):
+        w = setAppointmentWindow()
+        w.show()
+        app = asyncio.get_running_loop()
+        app.run_in_executor()
+        # loop=asyncio.new_event_loop()
+        # loop.run_until_complete(self.showAppointmentWindow())
+        
 
 
 async def runSignUp():
@@ -128,11 +150,11 @@ async def runSignUp():
     
 
 async def runPortal():
-    app = QGuiApplication(sys.argv)     
+    app = QApplication(sys.argv)     
     engine = QQmlApplicationEngine()
     
     #Get context
-    main = setAppointmentWindow()
+    main = addAppointmentWindow()
     engine.rootContext().setContextProperty("backend",main)
     
     

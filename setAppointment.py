@@ -15,12 +15,12 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"setAppointment.ui"))[0]
-class IntroWindow(QMainWindow,form):
-
+class setAppointmentWindow(QMainWindow,form):
+    
     def __init__(self):
-        super(IntroWindow,self).__init__()
+        super(setAppointmentWindow,self).__init__()
         self.setupUi(self)
-        self.EntButton.clicked.connect(self.sign_up)
+        
         self.calendarWidget.selectionChanged.connect(self.Doctor)
         self.Doc_Box.currentTextChanged.connect(self.date1)
         self.Time_Box.currentTextChanged.connect(self.Set_Time)
@@ -28,7 +28,7 @@ class IntroWindow(QMainWindow,form):
         self.flag1 = False
         self.Doc_Name = []
         if self.flag1==False:
-
+            
             self.conn = sqlite3.connect("doctor.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM doctors")
@@ -39,7 +39,7 @@ class IntroWindow(QMainWindow,form):
             for i in Docs:
                 self.Doc_Box.addItem(i[0]+' '+i[1])
                 self.Doc_Name.append(i[0]+' '+i[1])
-
+            
             self.conn.close()
             self.flag1=True
 
@@ -53,7 +53,7 @@ class IntroWindow(QMainWindow,form):
         print(val)
         try:
             self.c.execute(sql, val)
-
+            
         except sqlite3.Error:
             self.ErrorLabel.setText('This Phone Number is already exist')
         self.c.execute("SELECT * FROM patients")
@@ -139,7 +139,7 @@ class IntroWindow(QMainWindow,form):
 
     def Set_Time(self):
         self.appo_Button.setEnabled(True)
-
+        
 
     def  Set_appo(self):
         self.time = self.Time_Box.currentText()
@@ -153,19 +153,19 @@ class IntroWindow(QMainWindow,form):
         self.conn.close()
         self.Time_Box.clear()
         self.Doc_Box.setCurrentText('Choose A Doctor')
+        
+
+        
 
 
+        
+        
 
 
-
-
-
-
-
-
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
-    w = IntroWindow()
+    w = setAppointmentWindow()
     w.show()
-    sys.exit(app.exec_()) 
+    sys.exit(app.exec_())
