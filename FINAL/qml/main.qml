@@ -6,6 +6,7 @@ import "./controls"
 import "controls"
 import QtGraphicalEffects 1.15
 Window {
+
     id: window
     width: 1024
     height: 800
@@ -13,9 +14,10 @@ Window {
     minimumHeight: 480
     visible: true
     color: "#1e222a"
-    title: qsTr("Hello World")
+    title: qsTr("پورتال")
     flags: Qt.Window | Qt.FramelessWindowHint
     property int windowStatus: 0
+
     QtObject{
         id:internal
         function minmaxwindow(){
@@ -161,7 +163,7 @@ Window {
                     Label {
                         id: appTitle
                         color: "#9cafd4"
-                        text: qsTr("امیدرزاقی")
+                        text: "امیدرزاقی"
                         anchors.left: appIcon.right
                         anchors.right: parent.right
                         anchors.top: parent.top
@@ -173,6 +175,7 @@ Window {
                         font.pointSize: 10
                         padding: 8
                         font.family: "Tahoma"
+
                     }
 
                     MinimizeBtn {
@@ -452,6 +455,15 @@ Window {
             onActiveChanged: if(active){
                                  window.startSystemResize(Qt.BottomEdge)
                              }
+        }
+    }
+    Connections{
+        target: backend
+        function onSetName(stringText){
+                    appTitle.text = stringText;        }
+
+        function onSetPhone(stringText){
+            appTitle.text = stringText;
         }
     }
 

@@ -17,9 +17,11 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 form = uic.loadUiType(os.path.join(os.getcwd(),"setAppointment.ui"))[0]
 class setAppointmentWindow(QMainWindow,form):
     
-    def __init__(self):
+    def __init__(self,Name,Phone):
         super(setAppointmentWindow,self).__init__()
         self.setupUi(self)
+        self.name=Name
+        self.phone=Phone
         
         self.calendarWidget.selectionChanged.connect(self.Doctor)
         self.Doc_Box.currentTextChanged.connect(self.date1)
@@ -146,7 +148,7 @@ class setAppointmentWindow(QMainWindow,form):
         self.conn = sqlite3.connect("appoinment.db")
         self.c = self.conn.cursor()
         sql = "INSERT INTO appoinments (Date, Time,Doc_Name,Pat_Name,Pat_phone) VALUES (?,?,?,?,?)"
-        val = (self.date, self.time,self.doctor,self.FirstEdit.text(),self.PhoneEdit.text())
+        val = (self.date, self.time,self.doctor,self.name,self.phone)
         print(val)
         self.c.execute(sql, val)
         self.conn.commit()

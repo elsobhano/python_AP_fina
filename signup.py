@@ -122,8 +122,10 @@ class IntroWindow(QMainWindow,form):
         self.StackWidget.setCurrentIndex(1)
 
 class addAppointmentWindow(QObject):
-    def __init__(self):
+    def __init__(self,User_Name,User_Phone):
         QObject.__init__(self)
+        self.User_Name = User_Name
+        self.User_Phone = User_Phone
 
     async def showAppointmentWindow(self):
         # app = QApplication(sys.argv)
@@ -133,14 +135,21 @@ class addAppointmentWindow(QObject):
         # app.exec_() 
 
     @Slot()
-    def welcomeText(self):
-        w = setAppointmentWindow()
+    def openAppointment(self):
+        w = setAppointmentWindow(self.User_Name,self.User_Phone)
         w.show()
+        #TODO : درست کردن آسینک آیو
         app = asyncio.get_running_loop()
         app.run_in_executor()
         # loop=asyncio.new_event_loop()
         # loop.run_until_complete(self.showAppointmentWindow())
-        
+
+    setName = Signal(str)
+    setPhone = Signal(str)
+
+    @Slot()
+    def setUserName(self):
+        self.setName.emit(self.User_Name)  
 
 
 async def runSignUp():
@@ -149,19 +158,20 @@ async def runSignUp():
     w = IntroWindow()
     w.show()
     app.exec_()
-    return w.signInOk,"Omid"
+    return w.Name_User,w.Phone_User
     
 
-async def runPortal():
+async def runPortal(Name_User,Phone_User):
     app = QApplication(sys.argv)     
     engine = QQmlApplicationEngine()
     
     #Get context
-    main = addAppointmentWindow()
+    main = addAppointmentWindow(Name_User,Phone_User)
     engine.rootContext().setContextProperty("backend",main)
     
     
     engine.load(os.path.join(os.path.dirname(__file__), "FINAL/qml/main.qml"))
+    main.setName.emit(Name_User)
     if not engine.rootObjects():
         sys.exit(-1)
 
@@ -169,5 +179,5 @@ async def runPortal():
     app.exec_()
 
 loop = asyncio.get_event_loop()
-print(loop.run_until_complete(runSignUp()))
-print(loop.run_until_complete(runPortal()))
+Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
+print(loop.run_until_complete(runPortal(Name_User,Phone_User)))
