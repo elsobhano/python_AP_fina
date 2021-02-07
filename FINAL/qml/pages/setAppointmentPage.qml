@@ -41,7 +41,8 @@ Rectangle {
         anchors.rightMargin: 8
         onClicked:
         {
-            backend.welcomeText()
+
+            backend.openAppointment();
         }
     }
 
@@ -49,10 +50,8 @@ Rectangle {
     Connections{
         target: backend
 
-        function onOpenWindow(){
-            print("Heelo")
+
         }
-    }
 
 
 }
@@ -61,6 +60,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:800}
 }
 ##^##*/
