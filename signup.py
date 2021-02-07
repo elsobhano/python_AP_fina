@@ -56,12 +56,23 @@ class IntroWindow(QMainWindow,form):
 
         self.conn = sqlite3.connect("patient.db")
         self.c = self.conn.cursor()
+        self.PatButton.clicked.connect(self.sign1)
+        self.DocButton.clicked.connect(self.sign2)
+        self.RadioButton.clicked.connect(self.sign3)
         self.EntButton.clicked.connect(self.sign_up)
         self.SignUpButton.clicked.connect(self.go_to_sign_up)
         self.BackButton.clicked.connect(self.go_to_sign_in)
         self.EntButton_2.clicked.connect(self.sign_in)
         # self.conn.close()
-
+    def sign1(self):
+        self.id = 1
+        self.StackWidget.setCurrentIndex(1)
+    def sign2(self):
+        self.id = 2
+        self.StackWidget.setCurrentIndex(1)
+    def sign3(self):
+        self.id = 3
+        self.StackWidget.setCurrentIndex(1)
     def sign_up(self):
         self.c.execute("SELECT * FROM patients")
         print(self.c.fetchall())
