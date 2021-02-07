@@ -54,8 +54,7 @@ class IntroWindow(QMainWindow,form):
         self.PassEdit_2.textEdited.connect(self.validate_2)
         self.PhoneEdit_2.textEdited.connect(self.validate_2)
 
-        self.conn = sqlite3.connect("patient.db")
-        self.c = self.conn.cursor()
+        
         self.PatButton.clicked.connect(self.sign1)
         self.DocButton.clicked.connect(self.sign2)
         self.RadioButton.clicked.connect(self.sign3)
@@ -67,45 +66,71 @@ class IntroWindow(QMainWindow,form):
     def sign1(self):
         self.id = 1
         self.StackWidget.setCurrentIndex(1)
+        print(self.id)
     def sign2(self):
         self.id = 2
         self.StackWidget.setCurrentIndex(1)
+        print(self.id)
     def sign3(self):
         self.id = 3
         self.StackWidget.setCurrentIndex(1)
+        print(self.id)
     def sign_up(self):
-        self.c.execute("SELECT * FROM patients")
-        print(self.c.fetchall())
-        sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
-        val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
-        print(val)
+        if self.id == 1:
+            print('Im a patient')
+            self.conn = sqlite3.connect("patient.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM patients")
+            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
+            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+        elif self.id == 2:
+            print('Im a doctor')
+            self.conn = sqlite3.connect("doctor.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM doctors")
+            sql = "INSERT INTO doctors (Name, Family,Password,Phone) VALUES (?,?,?,?)"
+            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+        elif self.id == 3:
+            print('Im a radiology')
+            self.conn = sqlite3.connect("patient.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM patients")
+            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
+            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
         self.c.execute(sql, val)
-        self.c.execute("SELECT * FROM patients")
-        print(self.c.fetchall())
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
 
     def sign_in(self):
-        self.conn = sqlite3.connect("patient.db")
-        self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM patients")
-        check = self.c.fetchall()
+        if self.id == 1:
+            self.conn = sqlite3.connect("patient.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM patients")
+        elif self.id == 2:
+            self.conn = sqlite3.connect("doctor.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM doctors")
+        elif self.id == 3:
+            self.conn = sqlite3.connect("patient.db")
+            self.c = self.conn.cursor()
+            self.c.execute("SELECT * FROM patients")
         self.LoadingLabel.setText('Loading ... ')
         flag = False
+        check = self.c.fetchall()
         for i in check:
+            print('-----------------------------')
             if i[3]==self.PhoneEdit_2.text() and i[2]==self.PassEdit_2.text():
+                print(i[0])
+                print(i[1])
                 self.Name_User = i[0] + ' ' + i[1]
                 self.Phone_User = i[3]
                 print(self.Name_User)
                 print(self.Phone_User)
                 flag = True
-            
         if flag :
             self.signInOk = True
             self.close()
-            
-            
             
         else:
             self.signInNotOk = False
