@@ -3,11 +3,12 @@ import QtQuick.Controls 1.4
 
 import QtQuick.Controls 2.15
 
-
+import "../models"
 
 
 Rectangle {
     id: rectangle
+    color: "#323f54"
     anchors.fill: parent
     gradient: Gradient {
         GradientStop {
@@ -20,6 +21,53 @@ Rectangle {
             color: "#4c5568"
         }
     }
+
+
+
+    Connections{
+        target: backend
+    }
+
+
+    ListView {
+        id: listView
+        anchors.fill: parent
+        model: listModel
+        delegate: Item {
+            x : 0
+            height: 125
+            width: 800
+
+            Row {
+                id: setappointmentrow
+                width: rectangle.width
+                height: 120
+
+                SetAppointmentModel{
+
+                }
+
+
+            }
+        }
+
+        ListModel {
+                id: listModel
+
+                Component.onCompleted: {
+                    for (var i = 0; i < 24; i++) {
+                        append(createListElement());
+                    }
+                }
+
+                function createListElement() {
+                    return {
+                        hour: "01"
+                    };
+                }
+            }
+    }
+
 
     RoundButton {
         id: roundButton
@@ -45,21 +93,12 @@ Rectangle {
             backend.openAppointment();
         }
     }
-
-
-    Connections{
-        target: backend
-
-
-        }
-
-
 }
 
 
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:800}
+    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:800}D{i:5}
 }
 ##^##*/
