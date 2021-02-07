@@ -36,7 +36,7 @@ class IntroWindow(QMainWindow,form):
     def __init__(self):
         super(IntroWindow,self).__init__()
         self.setupUi(self)
-        self.StackWidget.setCurrentIndex(1)
+        self.StackWidget.setCurrentIndex(2)
         self.EntButton.setEnabled(False)
         self.EntButton_2.setEnabled(False)
         self.PassEdit.setEchoMode(QLineEdit.Password)
