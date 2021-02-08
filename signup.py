@@ -107,9 +107,12 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
+<<<<<<< HEAD
     # async def secondwindow():
         
 
+=======
+>>>>>>> 39313918a71b2848ce0025f1d6088c0411bbe912
     def sign_in(self):
         if self.id == 1:
             self.conn = sqlite3.connect("patient.db")
@@ -138,16 +141,12 @@ class IntroWindow(QMainWindow,form):
                 flag = True
         if flag :
             self.signInOk = True
-<<<<<<< HEAD
             self.hide()
             self.showSecondWindow()
             # loop=asyncio.new_event_loop()
             # loop.run_until_complete(secondwindow())
 
             
-=======
-            self.close()
->>>>>>> 467dc42b17c1896de95232339bb7c67acc87e123
             
         else:
             self.signInNotOk = False
