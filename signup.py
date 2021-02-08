@@ -33,7 +33,7 @@ class Second(QMainWindow,form1):
     def __init__(self, parent=None):
         super(Second, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         
 
 class IntroWindow(QMainWindow,form):
