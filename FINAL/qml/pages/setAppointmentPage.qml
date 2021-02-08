@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 1.4
-
+import QtQuick.LocalStorage 2.12
 import QtQuick.Controls 2.15
 
 import "../models"
@@ -32,7 +32,8 @@ Rectangle {
     ListView {
         id: listView
         anchors.fill: parent
-        model: listModel
+//        required SetAppointmentListModel
+        model:appointmentModel
         delegate: Item {
             x : 0
             height: 125
@@ -44,7 +45,7 @@ Rectangle {
                 height: 120
 
                 SetAppointmentModel{
-
+                    doc_name_string:"omid"
                 }
 
 
@@ -55,12 +56,13 @@ Rectangle {
                 id: listModel
 
                 Component.onCompleted: {
-                    for (var i = 0; i < 24; i++) {
+                    for (var i = 0; i < 1; i++) {
                         append(createListElement());
                     }
                 }
 
                 function createListElement() {
+
                     return {
                         hour: "01"
                     };
@@ -99,6 +101,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:800}D{i:5}
+    D{i:0;autoSize:true;formeditorZoom:0.75;height:480;width:800}
 }
 ##^##*/

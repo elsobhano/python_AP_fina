@@ -9,17 +9,17 @@ Rectangle {
     border.color: "#313c4c"
     border.width: 6
     anchors.fill: parent
-
+    property string doc_name_string: "دکتر جهانشاهی"
     Text {
         id: doc_name
         width: 0
         height: 16
         color: "#9edbfe"
-        text: "دکتر جهانشاهی"
+        text: doc_name_string
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.topMargin: 20
-        anchors.rightMargin: 20
+        anchors.rightMargin: 100
     }
 
     Text {
@@ -67,6 +67,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:100;width:800}D{i:1}D{i:2}D{i:3}D{i:4}
+    D{i:0;autoSize:true;height:100;width:800}
 }
 ##^##*/

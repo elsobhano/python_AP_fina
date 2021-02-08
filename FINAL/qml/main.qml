@@ -32,7 +32,7 @@ Window {
     }
 
     Rectangle {
-
+        id:bg
         color: "#2c313c"
         border.width: 0
         anchors.left: parent.left
