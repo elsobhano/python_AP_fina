@@ -101,7 +101,6 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
-
     def sign_in(self):
         if self.id == 1:
             self.conn = sqlite3.connect("patient.db")
