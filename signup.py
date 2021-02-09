@@ -16,7 +16,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
-from PySide2.QtCore import QObject,Signal,Slot,QDir,QAbstractTableModel
+from PySide2.QtCore import QObject,Signal,Slot,QDir,QAbstractTableModel,QAbstractListModel
 from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 import logging
 import asyncio
@@ -107,12 +107,9 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
-<<<<<<< HEAD
-    # async def secondwindow():
+
         
 
-=======
->>>>>>> 39313918a71b2848ce0025f1d6088c0411bbe912
     def sign_in(self):
         if self.id == 1:
             self.conn = sqlite3.connect("patient.db")
@@ -178,25 +175,22 @@ class IntroWindow(QMainWindow,form):
         self.StackWidget.setCurrentIndex(1)
 
 class addAppointmentWindow(QObject):
-    def __init__(self,User_Name,User_Phone):
+    def __init__(self,User_Name,User_Phone,appointmetContext):
         QObject.__init__(self)
         self.User_Name = User_Name
         self.User_Phone = User_Phone
+        self.appo_context=appointmetContext
 
-    async def showAppointmentWindow(self):
-        # app = QApplication(sys.argv)
-        # app.setStyle("Fusion")
-        w = setAppointmentWindow()
-        w.show()
-        # app.exec_() 
+    updateTable=Signal(str)
 
     @Slot()
     def openAppointment(self):
-        w = setAppointmentWindow(self.User_Name,self.User_Phone)
-        w.show()
-        #TODO : درست کردن آسینک آیو
-        app = asyncio.get_running_loop()
-        app.run_in_executor()
+        
+        self.w = setAppointmentWindow(self.User_Name,self.User_Phone,self.updateTable,self.appo_context)
+        self.w.show()
+        
+        
+        
         # loop=asyncio.new_event_loop()
         # loop.run_until_complete(self.showAppointmentWindow())
 
@@ -206,24 +200,6 @@ class addAppointmentWindow(QObject):
     @Slot()
     def setUserName(self):
         self.setName.emit(self.User_Name)  
-
-
-
-# class SqlConversionModel(QSqlTableModel):
-#     def __init__(self,parent=None):
-#         super(SqlConversionModel,self).__init__(parent)
-
-
-# def testQuery():
-#     query = QSqlQuery("")
-
-
-
-
-
-
-
-
 
 
 
@@ -246,61 +222,42 @@ def getUserAppointments(Phone_User):
     return reserve
 
 
-def createTable():
-    if table_name in QSqlDatabase.database().tables():
-        return
-
-    query = QSqlQuery()
-    if not query.exec_(
-        """
-        CREATE TABLE IF NOT EXISTS 'Conversations' (
-            'author' TEXT NOT NULL,
-            'recipient' TEXT NOT NULL,
-            'timestamp' TEXT NOT NULL,
-            'message' TEXT NOT NULL,
-        FOREIGN KEY('author') REFERENCES Contacts ( name ),
-        FOREIGN KEY('recipient') REFERENCES Contacts ( name )
-        )
-        """
-    ):
-        logging.error("Failed to query database")
-
-    # This adds the first message from the Bot
-    # and further development is required to make it interactive.
-    query.exec_(
-        """
-        INSERT INTO Conversations VALUES(
-            'machine', 'Me', '2019-01-07T14:36:06', 'Hello!'
-        )
-        """
-    )
-    logging.info(query)
 
 
 
-class appointmentModel(QAbstractTableModel):
-    def __init__(self,data):
+class appointmentModel(QAbstractListModel):
+    def __init__(self,data,phone):
         super(appointmentModel,self).__init__()
         self._data=data
+        self.phone=phone       
         
-        
-        
+
+    def updateData(self):
+        self.layoutAboutToBeChanged.emit()
+        self._data=getUserAppointments(self.phone)
+        self.layoutChanged.emit()
+
     def data(self, index, role):
+        if(role==0):
         # See below for the nested-list data structure.
         # .row() indexes into the outer list,
         # .column() indexes into the sub-list
-        return self._data[index.row()][index.column()]
+        
+            return {
+                "doc_name":self._data[index.row()][2],
+                "date":self._data[index.row()][0],
+                "time":self._data[index.row()][1]
+            }
 
 
     def rowCount(self, index):
         # The length of the outer list.
         return len(self._data)
 
-    def columnCount(self, index):
-        # The following takes the first sub-list, and returns
-        # the length (only works if all rows are an equal length)
-        return len(self._data[0])    
-        
+
+
+
+
         
 
 async def runPortal(Name_User,Phone_User):
@@ -313,12 +270,12 @@ async def runPortal(Name_User,Phone_User):
 
 
     #Get context
-    main = addAppointmentWindow(Name_User,Phone_User)
-    engine.rootContext().setContextProperty("backend",main)
-    appointment=appointmentModel(getUserAppointments(Phone_User))
+    appointment=appointmentModel(getUserAppointments(Phone_User),Phone_User)
     engine.rootContext().setContextProperty("appointmentModel",appointment)
-    dataList = ({"doc_name":"دکتر جهانشاهی"},{"doc_name":"دکتر اساسی"},{"doc_name":"دکتر هاشمی"})
-
+    main = addAppointmentWindow(Name_User,Phone_User,appointment)
+    engine.rootContext().setContextProperty("backend",main)
+    
+    
     # view = QQuickView()
     # view.setResizeMode(QQuickView.SizeRootObjectToView)
     # view.setInitialProperties( "SetAppointmentListModel", QVariant.fromValue(dataList) )
@@ -331,10 +288,10 @@ async def runPortal(Name_User,Phone_User):
     app.exec_()
 
 loop = asyncio.get_event_loop()
-Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
-# Name_User="امــــــیدرزاقی"
-# Phone_User="09156549973"
-# print(loop.run_until_complete(runPortal(Name_User,Phone_User)))
+# Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
+Name_User="Sobhan Asasi"
+Phone_User="09156549973"
+print(loop.run_until_complete(runPortal(Name_User,Phone_User)))
 
 
 

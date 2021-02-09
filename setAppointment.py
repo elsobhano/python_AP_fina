@@ -13,16 +13,20 @@ matplotlib.use("Qt5Agg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from PySide2.QtCore import Signal,Slot,QObject
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"setAppointment.ui"))[0]
 class setAppointmentWindow(QMainWindow,form):
     
-    def __init__(self,Name,Phone):
+    def __init__(self,Name,Phone,updateSignal,appo_context):
         super(setAppointmentWindow,self).__init__()
+        
+        
         self.setupUi(self)
         self.name=Name
         self.phone=Phone
-        
+        self.updateSignal=updateSignal
+        self.appo_context=appo_context
         self.calendarWidget.selectionChanged.connect(self.Doctor)
         self.Doc_Box.currentTextChanged.connect(self.date1)
         self.Time_Box.currentTextChanged.connect(self.Set_Time)
@@ -142,7 +146,9 @@ class setAppointmentWindow(QMainWindow,form):
     def Set_Time(self):
         self.appo_Button.setEnabled(True)
         
-
+    
+    
+    
     def  Set_appo(self):
         self.time = self.Time_Box.currentText()
         self.conn = sqlite3.connect("appoinment.db")
@@ -153,9 +159,14 @@ class setAppointmentWindow(QMainWindow,form):
         self.c.execute(sql, val)
         self.conn.commit()
         self.conn.close()
+        
+        
+        self.appo_context.updateData()
+        
         self.Time_Box.clear()
         self.Doc_Box.setCurrentText('Choose A Doctor')
-        
+
+       
 
         
 
