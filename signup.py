@@ -87,6 +87,11 @@ class IntroWindow(QMainWindow,form):
             self.c.execute("SELECT * FROM patients")
             sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
             val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+            try:
+                self.c.execute(sql, val)
+            
+            except sqlite3.Error:
+                self.ErrorLabel.setText('This Phone Number is already exist')
         elif self.id == 2:
             print('Im a doctor')
             self.conn = sqlite3.connect("doctor.db")
@@ -94,6 +99,11 @@ class IntroWindow(QMainWindow,form):
             self.c.execute("SELECT * FROM doctors")
             sql = "INSERT INTO doctors (Name, Family,Password,Phone) VALUES (?,?,?,?)"
             val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+            try:
+                self.c.execute(sql, val)
+            
+            except sqlite3.Error:
+                self.ErrorLabel.setText('This Phone Number is already exist')
         elif self.id == 3:
             print('Im a radiology')
             self.conn = sqlite3.connect("patient.db")
@@ -101,7 +111,11 @@ class IntroWindow(QMainWindow,form):
             self.c.execute("SELECT * FROM patients")
             sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
             val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
-        self.c.execute(sql, val)
+            try:
+                self.c.execute(sql, val)
+            
+            except sqlite3.Error:
+                self.ErrorLabel.setText('This Phone Number is already exist')
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)

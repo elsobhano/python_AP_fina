@@ -140,7 +140,8 @@ class PatPort(QMainWindow,form1):
                 for i in Times:
                     if i[0] == self.date  and i[2] == self.doctor:
                         print(i[1])
-                        time.remove(i[1])
+                        if i[1] in time:
+                            time.remove(i[1])
                 if len(time) == 0:
                     self.Check_Label.setText('This Doctor has No Time On This Day')
                 for i in time:
@@ -175,7 +176,8 @@ class PatPort(QMainWindow,form1):
                 Times = self.c.fetchall()
                 for i in Times:
                     if i[0] == self.date   and i[2] == self.doctor:
-                        time.remove(i[1])
+                        if i[1] in time:
+                            time.remove(i[1])
                 if len(time) == 0:
                     self.Check_Label.setText('This Doctor has No Time On This Day')
                 for i in time:
