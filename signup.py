@@ -2,7 +2,8 @@ from os.path import supports_unicode_filenames
 import sys
 import os
 from PyQt5 import uic, QtCore,Qt
-from PyQt5.QtWidgets import QApplication,QLabel ,QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
+from PyQt5.QtWidgets import QApplication,QLabel ,QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget,QFileDialog
+from PyQt5.QtGui import QPixmap
 import random
 
 import matplotlib
@@ -22,6 +23,7 @@ import logging
 import asyncio
 from setAppointment import setAppointmentWindow
 from PatientPortal import PatPort
+from shutil import copy2
 
 logging.basicConfig(filename="chat.log", level=logging.DEBUG)
 logger = logging.getLogger("logger")
@@ -62,6 +64,8 @@ class IntroWindow(QMainWindow,form):
         self.SignUpButton.clicked.connect(self.go_to_sign_up)
         self.BackButton.clicked.connect(self.go_to_sign_in)
         self.EntButton_2.clicked.connect(self.sign_in)
+        
+        self.InsertPicButton.clicked.connect(self.importPic)
         # self.conn.close()
     def sign1(self):
         self.id = 1
@@ -167,6 +171,22 @@ class IntroWindow(QMainWindow,form):
 
     def go_to_sign_in(self):
         self.StackWidget.setCurrentIndex(1)
+
+
+    def importPic(self):
+        address = (QFileDialog.getOpenFileName(self,"ّتصویر را انتخاب کنید.","./",'Image Files(*.jpg)'))[0]
+        if address!="":
+            copy2(address, "./images/pat_images")
+            newImageName=(''.join(random.choice("ABCDEFGHIJKLMNOPQRSTUWXYZ1234567890") for _ in range(10)))+".jpg"
+            self.imageName=(address.split("/")[-1])
+            os.rename("./images/pat_images/{}".format(self.imageName),"./images/pat_images/{}".format(newImageName))
+            self.imageName=newImageName
+            print(self.imageName)
+            self.pixmap = QPixmap('./images/pat_images/{}'.format(self.imageName))
+            self.PicLabel.setScaledContents(True)
+            self.PicLabel.setPixmap(self.pixmap)
+
+
 
 class addAppointmentWindow(QObject):
     def __init__(self,User_Name,User_Phone,appointmetContext):
