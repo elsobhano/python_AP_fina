@@ -282,10 +282,10 @@ async def runPortal(Name_User,Phone_User):
     app.exec_()
 
 loop = asyncio.get_event_loop()
-# Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
-Name_User="Sobhan Asasi"
-Phone_User="09156549973"
-print(loop.run_until_complete(runPortal(Name_User,Phone_User)))
+Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
+# Name_User="Sobhan Asasi"
+# Phone_User="09156549973"
+# print(loop.run_until_complete(runPortal(Name_User,Phone_User)))
 
 
 
