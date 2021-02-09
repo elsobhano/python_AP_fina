@@ -2,7 +2,7 @@ from os.path import supports_unicode_filenames
 import sys
 import os
 from PyQt5 import uic, QtCore,Qt
-from PyQt5.QtWidgets import QApplication, QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
+from PyQt5.QtWidgets import QApplication,QLabel ,QLineEdit, QWidget, QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget
 import random
 
 import matplotlib
@@ -21,19 +21,13 @@ from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 import logging
 import asyncio
 from setAppointment import setAppointmentWindow
+from PatientPortal import PatPort
 
 logging.basicConfig(filename="chat.log", level=logging.DEBUG)
 logger = logging.getLogger("logger")
 
 form = uic.loadUiType(os.path.join(os.getcwd(),"Form.ui"))[0]
-form1=uic.loadUiType(os.path.join(os.getcwd(),"GUI_BASE.ui"))[0]
 
-
-class Second(QMainWindow,form1):
-    def __init__(self, parent=None):
-        super(Second, self).__init__(parent)
-        self.setupUi(self)
-        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         
 
 class IntroWindow(QMainWindow,form):
@@ -107,7 +101,6 @@ class IntroWindow(QMainWindow,form):
         self.conn.commit()
         self.conn.close()
         self.StackWidget.setCurrentIndex(1)
-
         
 
     def sign_in(self):
@@ -135,6 +128,7 @@ class IntroWindow(QMainWindow,form):
                 self.Phone_User = i[3]
                 print(self.Name_User)
                 print(self.Phone_User)
+                self.tup = i
                 flag = True
         if flag :
             self.signInOk = True
@@ -152,7 +146,7 @@ class IntroWindow(QMainWindow,form):
         self.conn.close()
 
     def showSecondWindow(self):
-        self.w=Second()
+        self.w=PatPort(self.tup)
         self.w.show()
         
 
