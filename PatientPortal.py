@@ -221,4 +221,10 @@ class PatPort(QMainWindow,form1):
         groupBox.setLayout(vbox)
         return groupBox
 
-    
+        
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+    w = PatPort(("Sobhan","Asasi"," ","09156549973"))
+    w.show()
+    sys.exit(app.exec_())

@@ -34,6 +34,8 @@ Rectangle {
         anchors.fill: parent
 //        required SetAppointmentListModel
         model:appointmentModel
+
+
         delegate: Item {
             x : 0
             height: 125
@@ -45,29 +47,15 @@ Rectangle {
                 height: 120
 
                 SetAppointmentModel{
-                    doc_name_string:"omid"
+                    doc_name_string:model.display["doc_name"]
+                    date_string:model.display["date"]
+                    time_string:model.display["time"]
                 }
 
 
             }
         }
 
-        ListModel {
-                id: listModel
-
-                Component.onCompleted: {
-                    for (var i = 0; i < 1; i++) {
-                        append(createListElement());
-                    }
-                }
-
-                function createListElement() {
-
-                    return {
-                        hour: "01"
-                    };
-                }
-            }
     }
 
 
@@ -94,6 +82,15 @@ Rectangle {
 
             backend.openAppointment();
         }
+    }
+
+    Connections{
+
+        function onUpdateTable(stringText){
+           appTitle.text=stringText
+           internal.s()
+        }
+
     }
 }
 

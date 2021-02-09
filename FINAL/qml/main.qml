@@ -465,6 +465,7 @@ Window {
         function onSetPhone(stringText){
             appTitle.text = stringText;
         }
+
     }
 
 }

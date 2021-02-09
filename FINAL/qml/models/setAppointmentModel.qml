@@ -10,6 +10,9 @@ Rectangle {
     border.width: 6
     anchors.fill: parent
     property string doc_name_string: "دکتر جهانشاهی"
+    property string date_string:""
+    property string time_string:""
+    property string status_string: "گذشته"
     Text {
         id: doc_name
         width: 0
@@ -27,7 +30,7 @@ Rectangle {
         width: 0
         height: 16
         color: "#9edbfe"
-        text: "18"
+        text: time_string
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         horizontalAlignment: Text.AlignHCenter
@@ -41,7 +44,7 @@ Rectangle {
         width: 0
         height: 16
         color: "#9edbfe"
-        text: "27/04/137"
+        text: date_string
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.topMargin: 20
@@ -53,7 +56,7 @@ Rectangle {
         width: 0
         height: 16
         color: "#9edbfe"
-        text: "گذشته"
+        text: status_string
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         horizontalAlignment: Text.AlignLeft
