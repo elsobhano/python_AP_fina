@@ -250,7 +250,7 @@ class PatPort(QMainWindow,form1):
         vbox.addWidget(label2)
         if file != '':
             self.pic1 = QLabel(self)
-            self.pixmap1 = QPixmap(file)
+            self.pixmap1 = QPixmap('./img/'+file)
             self.pic1.setPixmap(self.pixmap1)
             self.pic1.resize(self.pixmap1.width(), self.pixmap1.height())
             vbox.addWidget(self.pic1)
