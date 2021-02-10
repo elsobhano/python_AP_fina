@@ -26,6 +26,6 @@ class DocPort(QMainWindow,form1):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
-    w = DocPort(("Sobhan","Asasi"," ","09156549973"))
+    w = DocPort(("Majid","Samiei","123","09153109973","resume","defaultImage.jpg"))
     w.show()
     sys.exit(app.exec_())

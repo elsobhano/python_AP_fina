@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
-    <height>661</height>
+    <width>827</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="palette">
@@ -505,19 +505,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="7">
-       <widget class="QPushButton" name="load_Button">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>بارگذاری عکس</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="4">
        <widget class="QLabel" name="label_3">
         <property name="sizePolicy">
@@ -530,6 +517,22 @@
          <string>:تاریخ</string>
         </property>
        </widget>
+      </item>
+      <item row="2" column="7">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item row="0" column="5" colspan="2">
        <widget class="QLineEdit" name="d_lineEdit">
@@ -556,7 +559,7 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="4" column="7">
+      <item row="5" column="7">
        <widget class="QLabel" name="image_View">
         <property name="text">
          <string>تصویر</string>
@@ -576,21 +579,18 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item row="2" column="7">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+      <item row="3" column="7">
+       <widget class="QPushButton" name="load_Button">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+        <property name="text">
+         <string>بارگذاری عکس</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
      </layout>
     </item>
@@ -601,7 +601,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>835</width>
+     <width>827</width>
      <height>26</height>
     </rect>
    </property>
