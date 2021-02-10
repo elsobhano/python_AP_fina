@@ -260,6 +260,7 @@ def getUserAppointments(Phone_User):
     c = conn.cursor()
     c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(Phone_User))
     reserve = c.fetchall()
+    c.close()
     return reserve
 
 
