@@ -23,6 +23,7 @@ import logging
 import asyncio
 from setAppointment import setAppointmentWindow
 from PatientPortal import PatPort
+from DoctorPortal import DocPort
 from shutil import copy2
 
 logging.basicConfig(filename="chat.log", level=logging.DEBUG)
@@ -67,6 +68,7 @@ class IntroWindow(QMainWindow,form):
         
         self.InsertPicButton.clicked.connect(self.importPic)
         # self.conn.close()
+        self.imageName = ''
     def sign1(self):
         self.id = 1
         self.StackWidget.setCurrentIndex(1)
@@ -85,26 +87,42 @@ class IntroWindow(QMainWindow,form):
             self.conn = sqlite3.connect("patient.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM patients")
-            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
-            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+            Phones = []
+            for i in self.c.fetchall():
+                Phones.append(i[3])
+            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone,Resume,Pic) VALUES (?,?,?,?,?,?)"
+            
         elif self.id == 2:
             print('Im a doctor')
             self.conn = sqlite3.connect("doctor.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM doctors")
-            sql = "INSERT INTO doctors (Name, Family,Password,Phone) VALUES (?,?,?,?)"
-            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
+            Phones = []
+            for i in self.c.fetchall():
+                Phones.append(i[3])
+            sql = "INSERT INTO doctors (Name, Family,Password,Phone,Resume,Pic) VALUES (?,?,?,?,?,?)"
+            
         elif self.id == 3:
             print('Im a radiology')
             self.conn = sqlite3.connect("patient.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM patients")
-            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone) VALUES (?,?,?,?)"
-            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text())
-        self.c.execute(sql, val)
-        self.conn.commit()
-        self.conn.close()
-        self.StackWidget.setCurrentIndex(1)
+            Phones = []
+            for i in self.c.fetchall():
+                Phones.append(i[3])
+            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone,Resume,Pic) VALUES (?,?,?,?,?,?)"
+        if self.PhoneEdit.text() not in Phones:
+            if self.imageName == '':
+                self.imageName = 'defaultImage.jpg'
+            val = (self.FirstEdit.text(), self.LastEdit.text(),self.PassEdit.text(),self.PhoneEdit.text(),self.ResumeEdit.text(),self.imageName)
+            self.c.execute(sql, val)
+            self.conn.commit()
+            self.conn.close()
+            self.StackWidget.setCurrentIndex(1)
+        else:
+            self.ErrorLabel.setText('This Phone is already exists!')
+            self.conn.close()
+        
         
 
     def sign_in(self):
@@ -139,10 +157,7 @@ class IntroWindow(QMainWindow,form):
             self.hide()
             self.showSecondWindow()
             # loop=asyncio.new_event_loop()
-            # loop.run_until_complete(secondwindow())
-
-            
-            
+            # loop.run_until_complete(secondwindow())   
         else:
             self.signInNotOk = False
             self.LoadingLabel.setText('nOk')
@@ -150,7 +165,10 @@ class IntroWindow(QMainWindow,form):
         self.conn.close()
 
     def showSecondWindow(self):
-        self.w=PatPort(self.tup)
+        if self.id == 1:
+            self.w = PatPort(self.tup)
+        elif self.id == 2:
+            self.w = DocPort(self.tup)
         self.w.show()
         
 
@@ -176,18 +194,27 @@ class IntroWindow(QMainWindow,form):
     def importPic(self):
         address = (QFileDialog.getOpenFileName(self,"ّتصویر را انتخاب کنید.","./",'Image Files(*.jpg)'))[0]
         if address!="":
-            copy2(address, "./images/pat_images")
+            if self.id == 1:
+                copy2(address, "./images/pat_images")
+            elif self.id == 2:
+                copy2(address, "./images/doc_images")
+            elif self.id == 3:
+                copy2(address, "./images/rad_images")
             newImageName=(''.join(random.choice("ABCDEFGHIJKLMNOPQRSTUWXYZ1234567890") for _ in range(10)))+".jpg"
             self.imageName=(address.split("/")[-1])
-            os.rename("./images/pat_images/{}".format(self.imageName),"./images/pat_images/{}".format(newImageName))
+            if self.id == 1:
+                os.rename("./images/pat_images/{}".format(self.imageName),"./images/pat_images/{}".format(newImageName))
+                self.pixmap = QPixmap('./images/pat_images/{}'.format(newImageName))
+            elif self.id == 2:
+                os.rename("./images/doc_images/{}".format(self.imageName),"./images/doc_images/{}".format(newImageName))
+                self.pixmap = QPixmap('./images/doc_images/{}'.format(newImageName))
+            elif self.id == 3:
+                os.rename("./images/rad_images/{}".format(self.imageName),"./images/rad_images/{}".format(newImageName))
+                self.pixmap = QPixmap('./images/rad_images/{}'.format(newImageName))
             self.imageName=newImageName
             print(self.imageName)
-            self.pixmap = QPixmap('./images/pat_images/{}'.format(self.imageName))
             self.PicLabel.setScaledContents(True)
             self.PicLabel.setPixmap(self.pixmap)
-
-
-
 class addAppointmentWindow(QObject):
     def __init__(self,User_Name,User_Phone,appointmetContext):
         QObject.__init__(self)
