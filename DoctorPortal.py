@@ -17,4 +17,15 @@ form1=uic.loadUiType(os.path.join(os.getcwd(),"DocPortal.ui"))[0]
 class DocPort(QMainWindow,form1):
     def __init__(self,input ,parent=None):
         super(DocPort, self).__init__(parent)
+        self.setupUi(self)
+
+        #TODO:DateEdit default today date
         print(input)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
+    w = DocPort(("Sobhan","Asasi"," ","09156549973"))
+    w.show()
+    sys.exit(app.exec_())
