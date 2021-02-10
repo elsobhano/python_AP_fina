@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>595</width>
-    <height>316</height>
+    <width>620</width>
+    <height>376</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -169,15 +169,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
     </active>
     <inactive>
      <colorrole role="WindowText">
@@ -324,15 +315,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
     </inactive>
     <disabled>
      <colorrole role="WindowText">
@@ -476,15 +458,6 @@
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="NoBrush">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
        </color>
       </brush>
      </colorrole>
@@ -636,15 +609,6 @@
            </color>
           </brush>
          </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
         </active>
         <inactive>
          <colorrole role="WindowText">
@@ -779,15 +743,6 @@
             <red>0</red>
             <green>0</green>
             <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
@@ -928,15 +883,6 @@
            </color>
           </brush>
          </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
         </disabled>
        </palette>
       </property>
@@ -973,10 +919,10 @@
        <widget class="QLabel" name="ErrorLabel">
         <property name="geometry">
          <rect>
-          <x>80</x>
-          <y>160</y>
-          <width>55</width>
-          <height>16</height>
+          <x>190</x>
+          <y>230</y>
+          <width>201</width>
+          <height>20</height>
          </rect>
         </property>
         <property name="text">
@@ -1091,8 +1037,8 @@
        <widget class="QPushButton" name="BackButton">
         <property name="geometry">
          <rect>
-          <x>191</x>
-          <y>201</y>
+          <x>192</x>
+          <y>260</y>
           <width>91</width>
           <height>28</height>
          </rect>
@@ -1104,8 +1050,8 @@
        <widget class="QPushButton" name="EntButton">
         <property name="geometry">
          <rect>
-          <x>289</x>
-          <y>201</y>
+          <x>290</x>
+          <y>260</y>
           <width>91</width>
           <height>28</height>
          </rect>
@@ -1149,6 +1095,29 @@
         </property>
         <property name="text">
          <string>ثبت نام</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="ResumeEdit">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>150</y>
+          <width>141</width>
+          <height>61</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>16</x>
+          <y>150</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>سابقه بیماری</string>
         </property>
        </widget>
       </widget>
@@ -1340,8 +1309,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>595</width>
-     <height>26</height>
+     <width>620</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -17,15 +17,20 @@ form1=uic.loadUiType(os.path.join(os.getcwd(),"PatPortal.ui"))[0]
 class PatPort(QMainWindow,form1):
     def __init__(self,input ,parent=None):
         super(PatPort, self).__init__(parent)
+        print(input)
         self.setupUi(self)
         self.firstlabel.setText(input[0])
         self.lastlabel.setText(input[1])
         self.phonelabel.setText(input[3])
         self.name = input[0] + ' ' + input[1]
         self.phone = input[3]
-        self.pixmap = QPixmap('pro1.jpeg')
+        self.imagepath = './images/pat_images/' + input[5]
+        print(self.imagepath)
+        self.pixmap = QPixmap(self.imagepath)
+        self.piclabel.setScaledContents(True)
         self.piclabel.setPixmap(self.pixmap)
         self.updateButton.clicked.connect(self.update)
+        self.resumelabel.setText(input[4])
         # tabel of appointments
         
         t = datetime.datetime.now()
@@ -80,7 +85,16 @@ class PatPort(QMainWindow,form1):
         for i in record:
             self.grid.addWidget(self.createExampleGroup(i[0],i[1],i[2],i[5],i[6]), num, 0)
             num = num + 1
-            
+        #پیام ها
+        self.conn = sqlite3.connect("message.db")
+        self.c = self.conn.cursor()
+        self.c.execute("SELECT * FROM messages WHERE PatPhone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.phone))
+        record = self.c.fetchall()
+        self.conn.close()
+        num = 0
+        for i in record:
+            self.grid2.addWidget(self.createExampleGroup1(i[0],i[1],i[2],i[5]), num, 0)
+            num = num + 1
     def update(self):
         t = datetime.datetime.now()
         self.conn = sqlite3.connect("appoinment.db")
@@ -97,10 +111,16 @@ class PatPort(QMainWindow,form1):
             date_str = m[0]+' '+m[1]
             date_reserve = datetime.datetime.strptime(date_str,'%Y-%m-%d %H')
             if date_reserve<t:
+                print(t)
+                print(date_reserve)
                 self.tableWidget.setItem(i,3, QTableWidgetItem('Finished'))
+                k = k + 1
+            else:
+                self.tableWidget.setItem(i,3, QTableWidgetItem(''))
                 k = k + 1
             i = i + 1
         self.numlabel.setText(str(k))
+        self.conn.close()
     def date1(self):
         self.date = self.calendarWidget.selectedDate().toString("yyyy-MM-dd")
         self.Check_Label.setText('')
@@ -192,18 +212,33 @@ class PatPort(QMainWindow,form1):
        
 
     def  Set_appo(self):
-        self.time = self.Time_Box.currentText()
-        self.conn = sqlite3.connect("appoinment.db")
-        self.c = self.conn.cursor()
-        sql = "INSERT INTO appoinments (Date, Time,Doc_Name,Pat_Name,Pat_phone) VALUES (?,?,?,?,?)"
-        val = (self.date, self.time,self.doctor,self.name,self.phone)
-        print(val)
-        self.c.execute(sql, val)
-        self.conn.commit()
-        self.conn.close()
-        self.Time_Box.clear()
-        self.Doc_Box.setCurrentText('Choose A Doctor')
+        if self.doctor!= 'Choose A Doctor':
+            self.time = self.Time_Box.currentText()
+            self.conn = sqlite3.connect("appoinment.db")
+            self.c = self.conn.cursor()
+            sql = "INSERT INTO appoinments (Date, Time,Doc_Name,Pat_Name,Pat_phone) VALUES (?,?,?,?,?)"
+            val = (self.date, self.time,self.doctor,self.name,self.phone)
+            print(val)
+            self.c.execute(sql, val)
+            self.conn.commit()
+            self.conn.close()
+            self.Time_Box.clear()
+            self.Doc_Box.setCurrentText('Choose A Doctor')
+        else:
+            self.Check_Label.setText('First Choose A Doctor!')
 
+
+    def createExampleGroup1(self,date,time,doc,dis):
+        
+        groupBox = QGroupBox('Date: '+date + '   Time : '+time)
+        label1 = QLabel("Doctor: " + doc)
+        label2 = QLabel("Discription: " + dis)
+        vbox = QVBoxLayout()
+        vbox.addWidget(label1)
+        vbox.addWidget(label2)    
+        vbox.addStretch(1)
+        groupBox.setLayout(vbox)
+        return groupBox
     def createExampleGroup(self,date,time,doc,dis,file):
         
         groupBox = QGroupBox('Date: '+date + '   Time : '+time)
@@ -222,6 +257,7 @@ class PatPort(QMainWindow,form1):
             vbox.addStretch(1)
         groupBox.setLayout(vbox)
         return groupBox
+    
 
         
 if __name__ == "__main__":
