@@ -980,7 +980,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>هشدار</string>
+         <string/>
         </property>
        </widget>
        <widget class="QLabel" name="PicLabel">

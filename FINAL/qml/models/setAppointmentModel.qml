@@ -13,9 +13,10 @@ Rectangle {
     property string date_string:""
     property string time_string:""
     property string status_string: "گذشته"
+    width: 800
     Text {
         id: doc_name
-        width: 0
+        width: 200
         height: 16
         color: "#9edbfe"
         text: doc_name_string
@@ -27,7 +28,7 @@ Rectangle {
 
     Text {
         id: time
-        width: 0
+        width: 200
         height: 16
         color: "#9edbfe"
         text: time_string
@@ -41,7 +42,7 @@ Rectangle {
 
     Text {
         id: date
-        width: 0
+        width: 200
         height: 16
         color: "#9edbfe"
         text: date_string
@@ -53,7 +54,7 @@ Rectangle {
 
     Text {
         id: status
-        width: 0
+        width: 200
         height: 16
         color: "#9edbfe"
         text: status_string
@@ -68,8 +69,4 @@ Rectangle {
 
 
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:100;width:800}
-}
-##^##*/
+
