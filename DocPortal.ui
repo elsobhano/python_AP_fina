@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>980</width>
-    <height>847</height>
+    <height>820</height>
    </rect>
   </property>
   <property name="palette">
@@ -142,15 +142,6 @@
      <colorrole role="ToolTipText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
@@ -294,15 +285,6 @@
        </color>
       </brush>
      </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
     </inactive>
     <disabled>
      <colorrole role="WindowText">
@@ -434,15 +416,6 @@
      <colorrole role="ToolTipText">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
         <red>0</red>
         <green>0</green>
         <blue>0</blue>
@@ -597,15 +570,6 @@
            </color>
           </brush>
          </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
         </active>
         <inactive>
          <colorrole role="WindowText">
@@ -740,15 +704,6 @@
             <red>0</red>
             <green>0</green>
             <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
            </color>
           </brush>
          </colorrole>
@@ -889,15 +844,6 @@
            </color>
           </brush>
          </colorrole>
-         <colorrole role="PlaceholderText">
-          <brush brushstyle="NoBrush">
-           <color alpha="128">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
         </disabled>
        </palette>
       </property>
@@ -913,7 +859,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1287,15 +1233,6 @@
                  </color>
                 </brush>
                </colorrole>
-               <colorrole role="PlaceholderText">
-                <brush brushstyle="NoBrush">
-                 <color alpha="128">
-                  <red>255</red>
-                  <green>255</green>
-                  <blue>255</blue>
-                 </color>
-                </brush>
-               </colorrole>
               </active>
               <inactive>
                <colorrole role="WindowText">
@@ -1433,15 +1370,6 @@
                  </color>
                 </brush>
                </colorrole>
-               <colorrole role="PlaceholderText">
-                <brush brushstyle="NoBrush">
-                 <color alpha="128">
-                  <red>255</red>
-                  <green>255</green>
-                  <blue>255</blue>
-                 </color>
-                </brush>
-               </colorrole>
               </inactive>
               <disabled>
                <colorrole role="WindowText">
@@ -1576,15 +1504,6 @@
                   <red>0</red>
                   <green>0</green>
                   <blue>0</blue>
-                 </color>
-                </brush>
-               </colorrole>
-               <colorrole role="PlaceholderText">
-                <brush brushstyle="NoBrush">
-                 <color alpha="128">
-                  <red>255</red>
-                  <green>255</green>
-                  <blue>255</blue>
                  </color>
                 </brush>
                </colorrole>
@@ -1912,8 +1831,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>928</width>
-             <height>711</height>
+             <width>936</width>
+             <height>707</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2140,8 +2059,8 @@
                  <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p dir='rtl' style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'B Titr','B Titr','B Titr','B Titr','B Titr','B Titr'; font-size:9pt; color:#ffffff;&quot;&gt;در این پروژه به طراحی و پیاده سازی یک برنامه مدیریت بیمار برای یک کلینیک دندان پزشکی خواهید پرداخت. این برنامه شامل بخش های مربوط به مدیریت بیمار، پزشکان و رادیولوژیست ها می باشد. برخی ویژگی های برنامه مورد نظر: • هر بیمار دارای پورتال مخصوص خود شامل سوابق مراجعات وی و تصاویر رادیولوژی مربوطه در طول زمان باشد • هر دندان پزشک دارای پرتال مخصوص خود شامل بیمار های تحت نظر وی و قابلیت دسترسی به سوابق پزشکی هر بیمار خود باشد • امکان نوبت دهی و همچنین ارسال پیام به بیمار برای هر دندان پزشک و رادیولوژیست فراهم باشد • امکان مشاهده برنامه روزانه دندانپزشک و رادیولوژیست&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'B Titr'; font-size:9pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p dir='rtl' style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'B Titr,B Titr,B Titr,B Titr,B Titr,B Titr'; font-weight:400; color:#ffffff;&quot;&gt;در این پروژه به طراحی و پیاده سازی یک برنامه مدیریت بیمار برای یک کلینیک دندان پزشکی خواهید پرداخت. این برنامه شامل بخش های مربوط به مدیریت بیمار، پزشکان و رادیولوژیست ها می باشد. برخی ویژگی های برنامه مورد نظر: • هر بیمار دارای پورتال مخصوص خود شامل سوابق مراجعات وی و تصاویر رادیولوژی مربوطه در طول زمان باشد • هر دندان پزشک دارای پرتال مخصوص خود شامل بیمار های تحت نظر وی و قابلیت دسترسی به سوابق پزشکی هر بیمار خود باشد • امکان نوبت دهی و همچنین ارسال پیام به بیمار برای هر دندان پزشک و رادیولوژیست فراهم باشد • امکان مشاهده برنامه روزانه دندانپزشک و رادیولوژیست&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -2203,7 +2122,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>980</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

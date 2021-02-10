@@ -12,20 +12,26 @@ import numpy as np
 from time import sleep
 import sqlite3
 form1=uic.loadUiType(os.path.join(os.getcwd(),"DocPortal.ui"))[0]
-
-
 class DocPort(QMainWindow,form1):
     def __init__(self,input ,parent=None):
         super(DocPort, self).__init__(parent)
-        self.setupUi(self)
-
-        #TODO:DateEdit default today date
         print(input)
-
+        self.firstlabel.setText(input[0])
+        self.lastlabel.setText(input[1])
+        self.phonelabel.setText(input[3])
+        self.name = input[0] + ' ' + input[1]
+        self.phone = input[3]
+        self.imagepath = './images/doc_images/' + input[5]
+        print(self.imagepath)
+        self.pixmap = QPixmap(self.imagepath)
+        self.piclabel.setScaledContents(True)
+        self.piclabel.setPixmap(self.pixmap)
+        self.updateButton.clicked.connect(self.update)
+        self.resumelabel.setText(input[4])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
-    w = DocPort(("Majid","Samiei","123","09153109973","resume","defaultImage.jpg"))
+    w = DocPort(("Majid","Samiei","123","09153109973","Jarah","defaultImage.jpg"))
     w.show()
     sys.exit(app.exec_())
