@@ -4,6 +4,7 @@ import os
 from PyQt5 import uic, QtCore,Qt
 from PyQt5.QtWidgets import QApplication,QGroupBox,QRadioButton,QVBoxLayout ,QLineEdit,QLabel ,QWidget,QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget,QTableWidgetItem
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import QDate,QTime
 import random
 import datetime
 import matplotlib
@@ -264,6 +265,6 @@ class PatPort(QMainWindow,form1):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
-    w = PatPort(("Sobhan","Asasi"," ","09156549973"))
+    w = PatPort(("Sobhan","Asasi"," ","09156549973","خود خره خریت که میگن","defaultImage.jpg"))
     w.show()
     sys.exit(app.exec_())

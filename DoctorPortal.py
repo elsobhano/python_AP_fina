@@ -2,10 +2,11 @@ from os.path import supports_unicode_filenames
 import sys
 import os
 from PyQt5 import uic, QtCore,Qt
-from PyQt5.QtWidgets import QApplication,QGroupBox,QRadioButton,QVBoxLayout ,QLineEdit,QLabel ,QWidget,QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget,QTableWidgetItem
+from PyQt5.QtWidgets import QFileDialog,QApplication,QGroupBox,QRadioButton,QVBoxLayout ,QLineEdit,QLabel ,QWidget,QPushButton, QMainWindow, QVBoxLayout ,QStackedWidget,QTableWidgetItem
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QDate
 from PyQt5.QtCore import QTime,QDate
+from PIL import Image
 import random
 import datetime
 import matplotlib
@@ -36,7 +37,7 @@ class DocPort(QMainWindow,form1):
         self.phone = input[3]
         self.imagepath = './images/doc_images/' + input[5]
         num = self.num_patient()
-        self.firstlabel.setText(str(num))
+        self.numlabel.setText(str(num))
         print(self.imagepath)
         self.pixmap = QPixmap(self.imagepath)
         self.piclabel.setScaledContents(True)
@@ -68,7 +69,7 @@ class DocPort(QMainWindow,form1):
         phones = []
         conn = sqlite3.connect("appoinment.db")
         c = conn.cursor()
-        c.execute("SELECT * FROM appoinments")
+        c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}'".format(self.name))
         total = c.fetchall()
         for i in total:
             if i[4] not in phones:

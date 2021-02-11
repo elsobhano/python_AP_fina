@@ -204,7 +204,7 @@ class IntroWindow(QMainWindow,form):
             elif self.id == 2:
                 copy2(address, "./images/doc_images")
             elif self.id == 3:
-                copy2(address, "./images/rad_images")
+                copy2(address, "./images/doc_images")
             newImageName=(''.join(random.choice("ABCDEFGHIJKLMNOPQRSTUWXYZ1234567890") for _ in range(10)))+".jpg"
             self.imageName=(address.split("/")[-1])
             if self.id == 1:
@@ -214,8 +214,8 @@ class IntroWindow(QMainWindow,form):
                 os.rename("./images/doc_images/{}".format(self.imageName),"./images/doc_images/{}".format(newImageName))
                 self.pixmap = QPixmap('./images/doc_images/{}'.format(newImageName))
             elif self.id == 3:
-                os.rename("./images/rad_images/{}".format(self.imageName),"./images/rad_images/{}".format(newImageName))
-                self.pixmap = QPixmap('./images/rad_images/{}'.format(newImageName))
+                os.rename("./images/doc_images/{}".format(self.imageName),"./images/doc_images/{}".format(newImageName))
+                self.pixmap = QPixmap('./images/doc_images/{}'.format(newImageName))
             self.imageName=newImageName
             print(self.imageName)
             self.PicLabel.setScaledContents(True)
