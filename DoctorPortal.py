@@ -48,9 +48,11 @@ class DocPort(QMainWindow,form1):
         #savabegh
         self.doc = input[0] + input[1]
         self.username_lineEdit.textChanged.connect(self.search)
+        self.update_button.clicked.connect(self.show_prescription)
         self.date_comboBox.currentTextChanged.connect(self.show_prescription)
         self.pres_textEdit.setReadOnly(True)
         self.doc_lineEdit.setEnabled(False)
+        self.new_Button.setEnabled(False)
         self.new_Button.clicked.connect(self.show_window)
 
         
@@ -129,6 +131,10 @@ class DocPort(QMainWindow,form1):
         self.doc_lineEdit.clear()
         self.pres_textEdit.clear()
         self.name_lineEdit.clear()
+        if name[0][0] == "":
+            self.new_Button.setEnabled(False)
+        else:
+            self.new_Button.setEnabled(True)
         try:
             self.doc_lineEdit.setText(doc_name[0][0])
             self.pres_textEdit.setText(pres[0][0])
