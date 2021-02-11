@@ -925,7 +925,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1988,8 +1988,8 @@ background-color: rgb(76, 153, 229);</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1020</width>
-             <height>692</height>
+             <width>926</width>
+             <height>662</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout">
@@ -2017,8 +2017,8 @@ background-color: rgb(76, 153, 229);</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1020</width>
-             <height>692</height>
+             <width>926</width>
+             <height>662</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">

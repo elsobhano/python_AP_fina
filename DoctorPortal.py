@@ -50,6 +50,7 @@ class DocPort(QMainWindow,form1):
         self.username_lineEdit.textChanged.connect(self.search)
         self.update_button.clicked.connect(self.show_prescription)
         self.date_comboBox.currentTextChanged.connect(self.show_prescription)
+        self.time_comboBox.currentTextChanged.connect(self.show_image)
         self.pres_textEdit.setReadOnly(True)
         self.doc_lineEdit.setEnabled(False)
         self.new_Button.setEnabled(False)
@@ -106,32 +107,56 @@ class DocPort(QMainWindow,form1):
         return groupBox
 #################################################################
     def search(self, val):
-        
+        self.date_comboBox.clear()
         c.execute(f'SELECT Date FROM savabeghs WHERE Phone == "{val}";')
         dates = c.fetchall()
         
         d = []
         for date in dates:
-            d.append(date[0])
-        self.date_comboBox.clear()
+            if date[0] not in d:
+                d.append(date[0])
+        
         self.date_comboBox.addItems(d)
-
+        c.execute(f'SELECT Time FROM savabeghs WHERE Phone == "{val}" AND Date == "{self.date_comboBox.currentText()}";')
+        times = c.fetchall()
+        
+        t = []
+        
+        for time in times:
+            t.append(time[0])
+        self.time_comboBox.clear()
+        self.time_comboBox.addItems(t)
 
 
     def show_prescription(self, val):
+        self.time_comboBox.clear()
+        date = self.date_comboBox.currentText()
+
         username = self.username_lineEdit.text()
-        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Time FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}";')
+        times = c.fetchall()
+        
+        t = []
+        for time in times:
+            t.append(time[0])
+        
+        self.time_comboBox.addItems(t)
+
+        self.time = self.time_comboBox.currentText()
+        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         pres = c.fetchall()
-        c.execute(f'SELECT Doc FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Doc FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         doc_name = c.fetchall()
-        c.execute(f'SELECT Pat FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Pat FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         name = c.fetchall()
-        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         img = c.fetchall()
+        
         self.doc_lineEdit.clear()
         self.pres_textEdit.clear()
         self.name_lineEdit.clear()
-        if name[0][0] == "":
+        self.img_lable.clear()
+        if name == []:
             self.new_Button.setEnabled(False)
         else:
             self.new_Button.setEnabled(True)
@@ -146,6 +171,31 @@ class DocPort(QMainWindow,form1):
                 self.img_lable.setPixmap(pixmap)
         except:
             pass
+    
+    def show_image(self):
+        date = self.date_comboBox.currentText()
+        time = self.time_comboBox.currentText()
+        username = self.username_lineEdit.text()
+        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{time}";')
+        pres = c.fetchall()
+        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{time}";')
+        img = c.fetchall()
+        self.pres_textEdit.clear()
+        self.img_lable.clear()
+        try:
+            self.pres_textEdit.setText(pres[0][0])
+            img_path = f'img/{img[0][0]}.jpg'
+            if os.path.isfile(img_path):
+                pixmap = QPixmap(img_path)
+                self.img_lable.setScaledContents(True)
+                self.img_lable.setPixmap(pixmap)
+        except:
+            pass
+
+
+
+
+
 
     def show_window(self):
         self.w = NewWindow()
@@ -252,7 +302,7 @@ class NewWindow(QMainWindow,new):
         pres = self.p_textEdit.toPlainText()
         img_str = ''
         if self.img_path != '':
-            img_str = name + '_' + self.date
+            img_str = name + '_' + self.date + "_" + datetime.datetime.now().strftime("%H%M")
             img = Image.open(self.img_path)
             img.save('img/' + img_str + '.jpg')
         
