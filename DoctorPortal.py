@@ -14,11 +14,11 @@ from matplotlib.backends.backend_qt5 import MainWindow
 import numpy as np
 from time import sleep
 import sqlite3
-form1=uic.loadUiType(os.path.join(os.getcwd(),"./forms/DocPortal.ui"))[0]
-new = uic.loadUiType(os.path.join(os.getcwd(), "./forms/new.ui"))[0]
+form1=uic.loadUiType(os.path.join(os.getcwd(),"DocPortal.ui"))[0]
+new = uic.loadUiType(os.path.join(os.getcwd(), "new.ui"))[0]
 
 
-conn = sqlite3.connect('./databases/savabegh.db')
+conn = sqlite3.connect('savabegh.db')
 c = conn.cursor()
 
 class DocPort(QMainWindow,form1):
@@ -50,6 +50,7 @@ class DocPort(QMainWindow,form1):
         self.username_lineEdit.textChanged.connect(self.search)
         self.update_button.clicked.connect(self.show_prescription)
         self.date_comboBox.currentTextChanged.connect(self.show_prescription)
+        self.time_comboBox.currentTextChanged.connect(self.show_image)
         self.pres_textEdit.setReadOnly(True)
         self.doc_lineEdit.setEnabled(False)
         self.new_Button.setEnabled(False)
@@ -58,7 +59,7 @@ class DocPort(QMainWindow,form1):
         
         #پیام ها
         self.pat_comboBox.currentTextChanged.connect(self.updateMessagesGrid)
-        self.messageConn=sqlite3.connect("./databases/message.db")
+        self.messageConn=sqlite3.connect("message.db")
         self.messageC = self.messageConn.cursor()
         self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
         messages = self.messageC.fetchall()
@@ -69,7 +70,7 @@ class DocPort(QMainWindow,form1):
             num=num+1
     def num_patient(self):
         phones = []
-        conn = sqlite3.connect("./databases/appoinment.db")
+        conn = sqlite3.connect("appoinment.db")
         c = conn.cursor()
         c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}'".format(self.name))
         total = c.fetchall()
@@ -82,7 +83,7 @@ class DocPort(QMainWindow,form1):
         
         for i in reversed(range(self.grid2.count())): 
             self.grid2.itemAt(i).widget().setParent(None)
-        self.messageConn=sqlite3.connect("./databases/message.db")
+        self.messageConn=sqlite3.connect("message.db")
         self.messageC = self.messageConn.cursor()
         self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
         messages = self.messageC.fetchall()
@@ -96,7 +97,7 @@ class DocPort(QMainWindow,form1):
     def createExampleGroup1(self,date,time,doc,dis):
         
         groupBox = QGroupBox('Date: '+date + '   Time : '+time)
-        label1 = QLabel("Patient: " + doc)
+        label1 = QLabel("Doctor: " + doc)
         label2 = QLabel("Discription: " + dis)
         vbox = QVBoxLayout()
         vbox.addWidget(label1)
@@ -106,32 +107,56 @@ class DocPort(QMainWindow,form1):
         return groupBox
 #################################################################
     def search(self, val):
-        
+        self.date_comboBox.clear()
         c.execute(f'SELECT Date FROM savabeghs WHERE Phone == "{val}";')
         dates = c.fetchall()
         
         d = []
         for date in dates:
-            d.append(date[0])
-        self.date_comboBox.clear()
+            if date[0] not in d:
+                d.append(date[0])
+        
         self.date_comboBox.addItems(d)
-
+        c.execute(f'SELECT Time FROM savabeghs WHERE Phone == "{val}" AND Date == "{self.date_comboBox.currentText()}";')
+        times = c.fetchall()
+        
+        t = []
+        
+        for time in times:
+            t.append(time[0])
+        self.time_comboBox.clear()
+        self.time_comboBox.addItems(t)
 
 
     def show_prescription(self, val):
+        self.time_comboBox.clear()
+        date = self.date_comboBox.currentText()
+
         username = self.username_lineEdit.text()
-        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Time FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}";')
+        times = c.fetchall()
+        
+        t = []
+        for time in times:
+            t.append(time[0])
+        
+        self.time_comboBox.addItems(t)
+
+        self.time = self.time_comboBox.currentText()
+        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         pres = c.fetchall()
-        c.execute(f'SELECT Doc FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Doc FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         doc_name = c.fetchall()
-        c.execute(f'SELECT Pat FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Pat FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         name = c.fetchall()
-        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{val}";')
+        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{self.time}";')
         img = c.fetchall()
+        
         self.doc_lineEdit.clear()
         self.pres_textEdit.clear()
         self.name_lineEdit.clear()
-        if name[0][0] == "":
+        self.img_lable.clear()
+        if name == []:
             self.new_Button.setEnabled(False)
         else:
             self.new_Button.setEnabled(True)
@@ -146,6 +171,31 @@ class DocPort(QMainWindow,form1):
                 self.img_lable.setPixmap(pixmap)
         except:
             pass
+    
+    def show_image(self):
+        date = self.date_comboBox.currentText()
+        time = self.time_comboBox.currentText()
+        username = self.username_lineEdit.text()
+        c.execute(f'SELECT Discript FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{time}";')
+        pres = c.fetchall()
+        c.execute(f'SELECT Pic FROM savabeghs WHERE Phone == "{username}" AND Date == "{date}" AND Time == "{time}";')
+        img = c.fetchall()
+        self.pres_textEdit.clear()
+        self.img_lable.clear()
+        try:
+            self.pres_textEdit.setText(pres[0][0])
+            img_path = f'img/{img[0][0]}.jpg'
+            if os.path.isfile(img_path):
+                pixmap = QPixmap(img_path)
+                self.img_lable.setScaledContents(True)
+                self.img_lable.setPixmap(pixmap)
+        except:
+            pass
+
+
+
+
+
 
     def show_window(self):
         self.w = NewWindow()
@@ -163,7 +213,7 @@ class DocPort(QMainWindow,form1):
         print('Here')
         self.tableWidget.setRowCount(0)
         self.tabdate = self.dateEdit.date().toString("yyyy-MM-dd")
-        self.conn = sqlite3.connect("./databases/appoinment.db")
+        self.conn = sqlite3.connect("appoinment.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' AND Date = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.name,self.tabdate))
         reserve = self.c.fetchall()
@@ -192,7 +242,7 @@ class DocPort(QMainWindow,form1):
         
     
     def getPatients(self,doc_name_familyname):
-        conn = sqlite3.connect("./databases/appoinment.db")
+        conn = sqlite3.connect("appoinment.db")
         c = conn.cursor()
         c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' ORDER BY date(Date) DESC,Time DESC".format(doc_name_familyname))
         output = c.fetchall()
@@ -212,7 +262,7 @@ class DocPort(QMainWindow,form1):
             self.updateMessagesGrid()
             
     def addToMessageDatabase(self):
-        conn = sqlite3.connect("./databases/message.db")
+        conn = sqlite3.connect("message.db")
         c = conn.cursor()
         t = QTime()
         d = QDate()
@@ -252,7 +302,7 @@ class NewWindow(QMainWindow,new):
         pres = self.p_textEdit.toPlainText()
         img_str = ''
         if self.img_path != '':
-            img_str = name + '_' + self.date
+            img_str = name + '_' + self.date + "_" + datetime.datetime.now().strftime("%H%M")
             img = Image.open(self.img_path)
             img.save('img/' + img_str + '.jpg')
         
