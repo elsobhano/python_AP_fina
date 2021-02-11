@@ -71,14 +71,17 @@ class IntroWindow(QMainWindow,form):
         self.imageName = ''
     def sign1(self):
         self.id = 1
+        self.resumelabel.setText('سابقه بیماری')
         self.StackWidget.setCurrentIndex(1)
         print(self.id)
     def sign2(self):
         self.id = 2
+        self.resumelabel.setText('تخصص')
         self.StackWidget.setCurrentIndex(1)
         print(self.id)
     def sign3(self):
         self.id = 3
+        self.resumelabel.setText('تخصص')
         self.StackWidget.setCurrentIndex(1)
         print(self.id)
     def sign_up(self):
@@ -104,13 +107,13 @@ class IntroWindow(QMainWindow,form):
             
         elif self.id == 3:
             print('Im a radiology')
-            self.conn = sqlite3.connect("patient.db")
+            self.conn = sqlite3.connect("doctor.db")
             self.c = self.conn.cursor()
-            self.c.execute("SELECT * FROM patients")
+            self.c.execute("SELECT * FROM doctors")
             Phones = []
             for i in self.c.fetchall():
                 Phones.append(i[3])
-            sql = "INSERT INTO patients (First_Name, Last_Name,Password,Phone,Resume,Pic) VALUES (?,?,?,?,?,?)"
+            sql = "INSERT INTO doctors (Name, Family,Password,Phone,Resume,Pic) VALUES (?,?,?,?,?,?)"
         if self.PhoneEdit.text() not in Phones:
             if self.imageName == '':
                 self.imageName = 'defaultImage.jpg'
@@ -135,9 +138,9 @@ class IntroWindow(QMainWindow,form):
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM doctors")
         elif self.id == 3:
-            self.conn = sqlite3.connect("patient.db")
+            self.conn = sqlite3.connect("doctor.db")
             self.c = self.conn.cursor()
-            self.c.execute("SELECT * FROM patients")
+            self.c.execute("SELECT * FROM doctors")
         self.LoadingLabel.setText('Loading ... ')
         flag = False
         check = self.c.fetchall()
@@ -160,7 +163,7 @@ class IntroWindow(QMainWindow,form):
             # loop.run_until_complete(secondwindow())   
         else:
             self.signInNotOk = False
-            self.LoadingLabel.setText('nOk')
+            self.LoadingLabel.setText('Wrong Password or Username')
                  
         self.conn.close()
 
@@ -168,6 +171,8 @@ class IntroWindow(QMainWindow,form):
         if self.id == 1:
             self.w = PatPort(self.tup)
         elif self.id == 2:
+            self.w = DocPort(self.tup)
+        elif self.id == 3:
             self.w = DocPort(self.tup)
         self.w.show()
         

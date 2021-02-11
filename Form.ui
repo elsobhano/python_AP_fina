@@ -1107,7 +1107,7 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="resumelabel">
         <property name="geometry">
          <rect>
           <x>16</x>
@@ -1280,21 +1280,21 @@
         <item>
          <widget class="QPushButton" name="PatButton">
           <property name="text">
-           <string>Patient</string>
+           <string>بیمار</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="DocButton">
           <property name="text">
-           <string>Doctor</string>
+           <string>دندانپزشک</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="RadioButton">
           <property name="text">
-           <string>Radiologyst</string>
+           <string>رادیولوژیست</string>
           </property>
          </widget>
         </item>

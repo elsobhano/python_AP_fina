@@ -35,6 +35,8 @@ class DocPort(QMainWindow,form1):
         self.name = input[0] + ' ' + input[1]
         self.phone = input[3]
         self.imagepath = './images/doc_images/' + input[5]
+        num = self.num_patient()
+        self.firstlabel.setText(str(num))
         print(self.imagepath)
         self.pixmap = QPixmap(self.imagepath)
         self.piclabel.setScaledContents(True)
@@ -62,8 +64,16 @@ class DocPort(QMainWindow,form1):
         for i in messages:
             self.grid2.addWidget(self.createExampleGroup1(i[0],i[1],i[3],i[5]),num,0) 
             num=num+1
-
-
+    def num_patient(self):
+        phones = []
+        conn = sqlite3.connect("appoinment.db")
+        c = conn.cursor()
+        c.execute("SELCT * FROM appoinments")
+        total = c.fetchall()
+        for i in total:
+            if i[4] not in phones:
+                phones.append(i[4])
+        return(len(phones))
     def updateMessagesGrid(self):
         print(self.grid2.rowCount())
         
@@ -72,7 +82,7 @@ class DocPort(QMainWindow,form1):
         self.messageConn=sqlite3.connect("message.db")
         self.messageC = self.messageConn.cursor()
         self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
-        messages = self.messageC.fetپثchall()
+        messages = self.messageC.fetchall()
         self.messageConn.close()
         num = 0 
         for i in messages:

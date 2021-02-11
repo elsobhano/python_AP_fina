@@ -54,6 +54,8 @@ class PatPort(QMainWindow,form1):
         self.numlabel.setText(str(k))
         self.conn.close()
         #نوبت گیری
+        l_date = QDate.currentDate()
+        self.calendarWidget.setMinimumDate(l_date)
         self.calendarWidget.selectionChanged.connect(self.Doctor)
         self.Doc_Box.currentTextChanged.connect(self.date1)
         self.Time_Box.currentTextChanged.connect(self.Set_Time)
@@ -117,7 +119,6 @@ class PatPort(QMainWindow,form1):
                 k = k + 1
             else:
                 self.tableWidget.setItem(i,3, QTableWidgetItem(''))
-                k = k + 1
             i = i + 1
         self.numlabel.setText(str(k))
         self.conn.close()
