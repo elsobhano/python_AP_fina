@@ -68,7 +68,7 @@ class DocPort(QMainWindow,form1):
         phones = []
         conn = sqlite3.connect("appoinment.db")
         c = conn.cursor()
-        c.execute("SELCT * FROM appoinments")
+        c.execute("SELECT * FROM appoinments")
         total = c.fetchall()
         for i in total:
             if i[4] not in phones:
