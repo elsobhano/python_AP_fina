@@ -14,11 +14,11 @@ from matplotlib.backends.backend_qt5 import MainWindow
 import numpy as np
 from time import sleep
 import sqlite3
-form1=uic.loadUiType(os.path.join(os.getcwd(),"DocPortal.ui"))[0]
-new = uic.loadUiType(os.path.join(os.getcwd(), "new.ui"))[0]
+form1=uic.loadUiType(os.path.join(os.getcwd(),"./forms/DocPortal.ui"))[0]
+new = uic.loadUiType(os.path.join(os.getcwd(), "./forms/new.ui"))[0]
 
 
-conn = sqlite3.connect('savabegh.db')
+conn = sqlite3.connect('./databases/savabegh.db')
 c = conn.cursor()
 
 class DocPort(QMainWindow,form1):
@@ -59,7 +59,7 @@ class DocPort(QMainWindow,form1):
         
         #پیام ها
         self.pat_comboBox.currentTextChanged.connect(self.updateMessagesGrid)
-        self.messageConn=sqlite3.connect("message.db")
+        self.messageConn=sqlite3.connect("./databases/message.db")
         self.messageC = self.messageConn.cursor()
         self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
         messages = self.messageC.fetchall()
@@ -70,7 +70,7 @@ class DocPort(QMainWindow,form1):
             num=num+1
     def num_patient(self):
         phones = []
-        conn = sqlite3.connect("appoinment.db")
+        conn = sqlite3.connect("./databases/appoinment.db")
         c = conn.cursor()
         c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}'".format(self.name))
         total = c.fetchall()
@@ -83,7 +83,7 @@ class DocPort(QMainWindow,form1):
         
         for i in reversed(range(self.grid2.count())): 
             self.grid2.itemAt(i).widget().setParent(None)
-        self.messageConn=sqlite3.connect("message.db")
+        self.messageConn=sqlite3.connect("./databases/message.db")
         self.messageC = self.messageConn.cursor()
         self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
         messages = self.messageC.fetchall()
@@ -213,7 +213,7 @@ class DocPort(QMainWindow,form1):
         print('Here')
         self.tableWidget.setRowCount(0)
         self.tabdate = self.dateEdit.date().toString("yyyy-MM-dd")
-        self.conn = sqlite3.connect("appoinment.db")
+        self.conn = sqlite3.connect("./databases/appoinment.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' AND Date = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.name,self.tabdate))
         reserve = self.c.fetchall()
@@ -242,7 +242,7 @@ class DocPort(QMainWindow,form1):
         
     
     def getPatients(self,doc_name_familyname):
-        conn = sqlite3.connect("appoinment.db")
+        conn = sqlite3.connect("./databases/appoinment.db")
         c = conn.cursor()
         c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' ORDER BY date(Date) DESC,Time DESC".format(doc_name_familyname))
         output = c.fetchall()
@@ -262,7 +262,7 @@ class DocPort(QMainWindow,form1):
             self.updateMessagesGrid()
             
     def addToMessageDatabase(self):
-        conn = sqlite3.connect("message.db")
+        conn = sqlite3.connect("./databases/message.db")
         c = conn.cursor()
         t = QTime()
         d = QDate()
