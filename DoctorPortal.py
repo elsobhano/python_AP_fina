@@ -131,11 +131,14 @@ class DocPort(QMainWindow,form1):
         self.doc_lineEdit.clear()
         self.pres_textEdit.clear()
         self.name_lineEdit.clear()
+        if name[0][0] == "":
+            self.new_Button.setEnabled(False)
+        else:
+            self.new_Button.setEnabled(True)
         try:
             self.doc_lineEdit.setText(doc_name[0][0])
             self.pres_textEdit.setText(pres[0][0])
             self.name_lineEdit.setText(name[0][0])
-            self.new_Button.setEnabled(True)
             img_path = f'img/{img[0][0]}.jpg'
             if os.path.isfile(img_path):
                 pixmap = QPixmap(img_path)
