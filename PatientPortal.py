@@ -12,7 +12,7 @@ from matplotlib.backends.backend_qt5 import MainWindow
 import numpy as np
 from time import sleep
 import sqlite3
-form1=uic.loadUiType(os.path.join(os.getcwd(),"PatPortal.ui"))[0]
+form1=uic.loadUiType(os.path.join(os.getcwd(),"./forms/PatPortal.ui"))[0]
 
 
 class PatPort(QMainWindow,form1):
@@ -35,7 +35,7 @@ class PatPort(QMainWindow,form1):
         # tabel of appointments
         
         t = datetime.datetime.now()
-        self.conn = sqlite3.connect("appoinment.db")
+        self.conn = sqlite3.connect("./databases/appoinment.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         reserve = self.c.fetchall()
@@ -65,7 +65,7 @@ class PatPort(QMainWindow,form1):
         self.Doc_Name = []
         if self.flag1==False:
             
-            self.conn = sqlite3.connect("doctor.db")
+            self.conn = sqlite3.connect("./databases/doctor.db")
             self.c = self.conn.cursor()
             self.c.execute("SELECT * FROM doctors")
             Docs = self.c.fetchall()
@@ -79,7 +79,7 @@ class PatPort(QMainWindow,form1):
             self.conn.close()
             self.flag1=True
         #سوابق
-        self.conn = sqlite3.connect("savabegh.db")
+        self.conn = sqlite3.connect("./databases/savabegh.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM savabeghs WHERE Phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         record = self.c.fetchall()
@@ -89,7 +89,7 @@ class PatPort(QMainWindow,form1):
             self.grid.addWidget(self.createExampleGroup(i[0],i[1],i[2],i[5],i[6]), num, 0)
             num = num + 1
         #پیام ها
-        self.conn = sqlite3.connect("message.db")
+        self.conn = sqlite3.connect("./databases/message.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM messages WHERE PatPhone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         record = self.c.fetchall()
@@ -100,7 +100,7 @@ class PatPort(QMainWindow,form1):
             num = num + 1
     def update(self):
         t = datetime.datetime.now()
-        self.conn = sqlite3.connect("appoinment.db")
+        self.conn = sqlite3.connect("./databases/appoinment.db")
         self.c = self.conn.cursor()
         self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         reserve = self.c.fetchall()
@@ -130,7 +130,7 @@ class PatPort(QMainWindow,form1):
         self.Time_Box.clear()
         if self.doctor in self.Doc_Name:
             print('-------------------')
-            self.conn = sqlite3.connect("doctor.db")
+            self.conn = sqlite3.connect("./databases/doctor.db")
             self.c = self.conn.cursor()
             x = self.doctor.split()
             print(x)
@@ -155,7 +155,7 @@ class PatPort(QMainWindow,form1):
                         newtime.append(i)
                 time = newtime
             if len(time) != 0:
-                self.conn = sqlite3.connect("appoinment.db")
+                self.conn = sqlite3.connect("./databases/appoinment.db")
                 self.c = self.conn.cursor()
                 self.c.execute("SELECT * FROM appoinments")
                 Times = self.c.fetchall()
@@ -192,7 +192,7 @@ class PatPort(QMainWindow,form1):
                         newtime.append(i)
                 time = newtime
             if len(time) != 0:   
-                self.conn = sqlite3.connect("appoinment.db")
+                self.conn = sqlite3.connect("./databases/appoinment.db")
                 self.c = self.conn.cursor()
                 self.c.execute("SELECT * FROM appoinments")
                 Times = self.c.fetchall()
@@ -216,7 +216,7 @@ class PatPort(QMainWindow,form1):
     def  Set_appo(self):
         if self.doctor!= 'Choose A Doctor':
             self.time = self.Time_Box.currentText()
-            self.conn = sqlite3.connect("appoinment.db")
+            self.conn = sqlite3.connect("./databases/appoinment.db")
             self.c = self.conn.cursor()
             sql = "INSERT INTO appoinments (Date, Time,Doc_Name,Pat_Name,Pat_phone) VALUES (?,?,?,?,?)"
             val = (self.date, self.time,self.doctor,self.name,self.phone)
@@ -233,7 +233,7 @@ class PatPort(QMainWindow,form1):
     def createExampleGroup1(self,date,time,doc,dis):
         
         groupBox = QGroupBox('Date: '+date + '   Time : '+time)
-        label1 = QLabel("Patient: " + doc)
+        label1 = QLabel("Doctor: " + doc)
         label2 = QLabel("Message: " + dis)
         vbox = QVBoxLayout()
         vbox.addWidget(label1)
