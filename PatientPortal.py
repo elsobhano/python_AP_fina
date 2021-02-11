@@ -36,7 +36,7 @@ class PatPort(QMainWindow,form1):
         t = datetime.datetime.now()
         self.conn = sqlite3.connect("appoinment.db")
         self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.phone))
+        self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         reserve = self.c.fetchall()
         self.tableWidget.setRowCount(len(reserve))
         i = 0
@@ -78,7 +78,7 @@ class PatPort(QMainWindow,form1):
         #سوابق
         self.conn = sqlite3.connect("savabegh.db")
         self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM savabeghs WHERE Phone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.phone))
+        self.c.execute("SELECT * FROM savabeghs WHERE Phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         record = self.c.fetchall()
         self.conn.close()
         num = 0
@@ -88,7 +88,7 @@ class PatPort(QMainWindow,form1):
         #پیام ها
         self.conn = sqlite3.connect("message.db")
         self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM messages WHERE PatPhone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.phone))
+        self.c.execute("SELECT * FROM messages WHERE PatPhone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         record = self.c.fetchall()
         self.conn.close()
         num = 0
@@ -99,7 +99,7 @@ class PatPort(QMainWindow,form1):
         t = datetime.datetime.now()
         self.conn = sqlite3.connect("appoinment.db")
         self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.phone))
+        self.c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.phone))
         reserve = self.c.fetchall()
         self.tableWidget.setRowCount(len(reserve))
         i = 0
@@ -231,8 +231,8 @@ class PatPort(QMainWindow,form1):
     def createExampleGroup1(self,date,time,doc,dis):
         
         groupBox = QGroupBox('Date: '+date + '   Time : '+time)
-        label1 = QLabel("Doctor: " + doc)
-        label2 = QLabel("Discription: " + dis)
+        label1 = QLabel("Patient: " + doc)
+        label2 = QLabel("Message: " + dis)
         vbox = QVBoxLayout()
         vbox.addWidget(label1)
         vbox.addWidget(label2)    

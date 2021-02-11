@@ -258,7 +258,7 @@ async def runSignUp():
 def getUserAppointments(Phone_User):
     conn = sqlite3.connect("appoinment.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(Phone_User))
+    c.execute("SELECT * FROM appoinments WHERE Pat_phone = '{}' ORDER BY date(Date) DESC,Time DESC".format(Phone_User))
     reserve = c.fetchall()
     c.close()
     return reserve

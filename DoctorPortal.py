@@ -50,6 +50,48 @@ class DocPort(QMainWindow,form1):
         self.doc_lineEdit.setEnabled(False)
         self.new_Button.clicked.connect(self.show_window)
 
+        
+        #پیام ها
+        self.pat_comboBox.currentTextChanged.connect(self.updateMessagesGrid)
+        self.messageConn=sqlite3.connect("message.db")
+        self.messageC = self.messageConn.cursor()
+        self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
+        messages = self.messageC.fetchall()
+        self.messageConn.close()
+        num = 0 
+        for i in messages:
+            self.grid2.addWidget(self.createExampleGroup1(i[0],i[1],i[3],i[5]),num,0) 
+            num=num+1
+
+
+    def updateMessagesGrid(self):
+        print(self.grid2.rowCount())
+        
+        for i in reversed(range(self.grid2.count())): 
+            self.grid2.itemAt(i).widget().setParent(None)
+        self.messageConn=sqlite3.connect("message.db")
+        self.messageC = self.messageConn.cursor()
+        self.messageC.execute("SELECT * FROM messages WHERE Doc = '{}' AND Pat = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.doc_completeName,self.pat_comboBox.currentText()))
+        messages = self.messageC.fetپثchall()
+        self.messageConn.close()
+        num = 0 
+        for i in messages:
+            self.grid2.addWidget(self.createExampleGroup1(i[0],i[1],i[3],i[5]),num,0) 
+            num=num+1
+
+
+    def createExampleGroup1(self,date,time,doc,dis):
+        
+        groupBox = QGroupBox('Date: '+date + '   Time : '+time)
+        label1 = QLabel("Doctor: " + doc)
+        label2 = QLabel("Discription: " + dis)
+        vbox = QVBoxLayout()
+        vbox.addWidget(label1)
+        vbox.addWidget(label2)    
+        vbox.addStretch(1)
+        groupBox.setLayout(vbox)
+        return groupBox
+#################################################################
     def search(self, val):
         
         c.execute(f'SELECT Date FROM savabeghs WHERE Phone == "{val}";')
@@ -106,7 +148,7 @@ class DocPort(QMainWindow,form1):
         self.tabdate = self.dateEdit.date().toString("yyyy-MM-dd")
         self.conn = sqlite3.connect("appoinment.db")
         self.c = self.conn.cursor()
-        self.c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' AND Date = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(self.name,self.tabdate))
+        self.c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' AND Date = '{}' ORDER BY date(Date) DESC,Time DESC".format(self.name,self.tabdate))
         reserve = self.c.fetchall()
         self.conn.close()
         self.tableWidget.setRowCount(len(reserve))
@@ -135,7 +177,7 @@ class DocPort(QMainWindow,form1):
     def getPatients(self,doc_name_familyname):
         conn = sqlite3.connect("appoinment.db")
         c = conn.cursor()
-        c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' ORDER BY date(Date) DESC,CAST(Time AS INTEGER) DESC".format(doc_name_familyname))
+        c.execute("SELECT * FROM appoinments WHERE Doc_Name = '{}' ORDER BY date(Date) DESC,Time DESC".format(doc_name_familyname))
         output = c.fetchall()
         patientList=[]
         for i in output:
@@ -145,9 +187,12 @@ class DocPort(QMainWindow,form1):
         return patientList
 
     def sendMessage(self):
+        
         if(self.msg_lineEdit.text != '' and self.pat_comboBox.currentText() != ''):
+            
             self.addToMessageDatabase()
             self.msg_lineEdit.clear()
+            self.updateMessagesGrid()
             
     def addToMessageDatabase(self):
         conn = sqlite3.connect("message.db")
