@@ -97,7 +97,7 @@ class DocPort(QMainWindow,form1):
     def createExampleGroup1(self,date,time,doc,dis):
         
         groupBox = QGroupBox('Date: '+date + '   Time : '+time)
-        label1 = QLabel("Doctor: " + doc)
+        label1 = QLabel("Patient: " + doc)
         label2 = QLabel("Discription: " + dis)
         vbox = QVBoxLayout()
         vbox.addWidget(label1)
