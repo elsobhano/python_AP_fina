@@ -222,11 +222,11 @@ async def runSignUp():
     w.show()
     
     app.exec_()
-    return w.Name_User,w.Phone_User
+    
     
 
 loop = asyncio.get_event_loop()
-Name_User,Phone_User=(loop.run_until_complete(runSignUp()))
+(loop.run_until_complete(runSignUp()))
 
 
 
